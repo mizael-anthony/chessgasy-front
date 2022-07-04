@@ -3,14 +3,14 @@ import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material';
 import Theme, { Colors } from './styles/theme/Theme';
 import NavBar from './components/navbar/NavBar';
-import Home from './components/pages/home/Home';
-import Players from './components/pages/player/Players';
-import Infos from './components/pages/info/Infos';
-import Tournaments from './components/pages/tournament/Tournaments';
+import Home from './components/pages/Home';
+import {Player} from './components/pages/Player';
+import Infos from './components/pages/Infos';
+import {Tournament} from './components/pages/Tournament';
 import Footer from './components/footer/Footer';
 import { Routes, Route } from 'react-router-dom';
-import Actualities from './components/pages/actuality/Actualities'
-import Clubs from './components/pages/club/Clubs'
+import {Actuality} from './components/pages/Actuality'
+import {Club} from './components/pages/Club'
 
 
 function App() {
@@ -37,10 +37,10 @@ function App() {
         <NavBar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="news" element={<Actualities/>}/>
-          <Route path="tournaments" element={<Tournaments/>}/>
-          <Route path="clubs" element={<Clubs/>}/>
-          <Route path="players" element={<Players/>}/>
+          <Route path="news" element={<Actuality/>}/>
+          <Route path="tournaments" element={<Tournament/>}/>
+          <Route path="clubs" element={<Club/>}/>
+          <Route path="players" element={<Player/>}/>
           <Route path="infos" element={<Infos/>}/>
         </Routes>
         <Footer/>

@@ -5,19 +5,35 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Colors } from '../styles/theme/Theme';
+import { Colors } from '../../styles/theme/Theme';
 import Button from '@mui/material/Button'
 
 
-export default function Tournament() {
 
-
+export function Tournament() {
     return (
+      <div>Tournaments</div>
+    )
+}
 
-        <Card sx={{ maxWidth: 345 }}>
+
+export function TournamentList(){
+  return(
+    <div>TournamentList</div>
+  )
+}
+
+export function TournamentDetails(){
+  return(
+    <div>TournamentDetails</div>
+  )
+}
+
+
+export function TournamentCard(){
+  return(
+    <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: Colors.grey }} aria-label="recipe">
@@ -53,5 +69,5 @@ export default function Tournament() {
             </CardActions>
 
         </Card>
-    )
+  )
 }
