@@ -18,7 +18,7 @@ export default function NavBar(){
 
     // Url de chaque menu
     const urls = {
-        'home' : '',
+        'home' : '/',
         'news' : 'news',
         'tournaments' : 'tournaments',
         'clubs' : 'clubs',
