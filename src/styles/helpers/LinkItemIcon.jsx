@@ -2,16 +2,15 @@ import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Link } from 'react-router-dom'
 
 export default function LinkItemIcon({ name, Icon, url }) {
+
     return (
-        <Link
-        style={{ textDecoration: "none", color:"inherit"}}
-        to={`${url}`}>
             <ListItemButton
                 sx={{
                     display: 'block',
                     justifyContent: 'center'
                 }}
             >
+            <Link to={`${url}`} style={{textDecoration:'none', color:'inherit'}}>
                 <ListItemIcon
                     sx={{
                         display: 'flex',
@@ -25,7 +24,10 @@ export default function LinkItemIcon({ name, Icon, url }) {
                         textAlign: 'center'
                     }}
                 />
+                
+            </Link>
+
             </ListItemButton>
-        </Link>
+
     )
 }

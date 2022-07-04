@@ -7,11 +7,15 @@ import { Colors } from '../styles/theme/Theme';
 export default function Player() {
     return (
         <Card>
-            <CardMedia>
+            <CardMedia
+                sx={{
+                    padding:'8px 16px'
+                }}
+            >
             <Avatar
                 alt="Bobby Fischer"
                 src="./wallhaven-2kg97y.jpg"
-                sx={{width: 250, height:250, margin:'5px auto'}}
+                sx={{width: 200, height:200}}
             />
             </CardMedia>
 

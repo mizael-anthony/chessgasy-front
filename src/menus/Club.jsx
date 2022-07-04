@@ -13,7 +13,7 @@ export default function Club() {
                     <Avatar
                         alt="Bobby Fischer"
                         src="./wallhaven-2kg97y.jpg"
-                        sx={{ width: 100, height: 100, margin: "0.5em" }}
+                        sx={{ width: 100, height: 100 }}
 
                     />
                 }

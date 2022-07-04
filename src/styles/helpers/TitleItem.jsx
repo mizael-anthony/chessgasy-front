@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { Colors } from "../theme/Theme";
 
 export default function TitleItem({ title }) {
   return (

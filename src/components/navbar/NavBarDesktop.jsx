@@ -12,7 +12,7 @@ import { Divider } from "@mui/material";
 
 export default function NavBarDesktop({ url }) {
     return (
-        <NavBarContainer> 
+        <NavBarContainer>
             <NavBarHeader>ChessGasy</NavBarHeader>
             <LinkList type="row">
 

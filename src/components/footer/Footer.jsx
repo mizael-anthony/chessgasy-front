@@ -3,9 +3,9 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import {Box, Grid, Link, Typography } from "@mui/material";
+import { Box, Grid, Link, Typography } from "@mui/material";
 import { FooterTitle } from "../../styles/footer/FooterStyle";
-import { Colors } from '../../styles/theme/Theme';
+import { Colors } from "../../styles/theme/Theme";
 
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';

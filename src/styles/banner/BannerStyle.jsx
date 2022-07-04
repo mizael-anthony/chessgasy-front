@@ -25,7 +25,7 @@ export const BannerImage = styled("img")(({src, theme}) => ({
     },
     [theme.breakpoints.down('sm')]:{
         width: '320px',
-        height: '300px',
+        width: '300px',
     },
 }))
 
