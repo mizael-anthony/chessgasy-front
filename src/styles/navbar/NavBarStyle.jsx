@@ -15,16 +15,6 @@ export const NavBarContainer = styled(Box)(() => ({
 
 }))
 
-// Container qui met en bas les Menus à faire
-export const NavBarContainerBlock = styled(AppBar)(() => ({
-    display: 'block',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '2px 8px'
-
-
-}))
-
 
 // Header
 export const NavBarHeader = styled(Typography)(() => ({

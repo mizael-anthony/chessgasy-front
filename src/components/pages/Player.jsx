@@ -1,20 +1,37 @@
 import Typography from '@mui/material/Typography';
-import { Avatar, Link, Card, CardMedia, CardContent } from '@mui/material';
+import { Avatar, Link, Box } from '@mui/material';
 import { Colors } from '../../styles/theme/Theme';
+import TitleItem from '../../styles/helpers/TitleItem';
+import { Container, Grid } from '@mui/material'
 
 
 
 
 export function Player() {
   return (
-    <div>Players</div>
+    <>
+      <TitleItem title={"Joueurs"} />
+      <PlayerList/>
+    </>
+
   )
 }
 
 
 export function PlayerList() {
+  const data = [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12]
+  if (!(data instanceof Array)) throw new Error("Data doit être un tableau.")
+
   return (
-    <div>PlayerList</div>
+    <Container>
+      <Grid container spacing={4} sx={{ justifyContent: "center" }}>
+        {
+          data.map((d) => {
+            return <Grid key={d} item md={3} sm={6}>{<PlayerCard data={d} />}</Grid>
+          })
+        }
+      </Grid>
+    </Container>
   )
 }
 
@@ -26,35 +43,30 @@ export function PlayerDetails() {
 
 export function PlayerCard() {
   return (
-    <Card>
-      <CardMedia
-        sx={{
-          padding:'8px 16px'
-        }}
-      >
-        <Avatar
-          alt="Bobby Fischer"
-          src="./wallhaven-2kg97y.jpg"
-          sx={{ width: 200, height: 200 }}
-        />
-      </CardMedia>
+    <Box
+      justifyContent={"center"}
+    >
 
-      <CardContent>
-        <Typography variant="body1" textAlign="center">
-          <Link
-            href="#"
-            underline="hover"
-            variant="inherit"
-            color={Colors.dark}
-          >
-            Bobby Fischer
-          </Link>
-        </Typography>
-        <Typography variant="body2" textAlign="center">
-          Elo 1875
-        </Typography>
-      </CardContent>
+      <Avatar
+        alt="Bobby Fischer"
+        src="./wallhaven-2kg97y.jpg"
+        sx={{ width: 250, height: 250, margin: "0.5em" }}
+      />
 
-    </Card>
+      <Typography variant="body1" textAlign="center">
+        <Link
+          href="#"
+          underline="hover"
+          variant="inherit"
+          color={Colors.dark}
+        >
+          Bobby Fischer
+        </Link>
+      </Typography>
+      <Typography variant="body2" textAlign="center">
+        Elo 1875
+      </Typography>
+
+    </Box>
   )
 }

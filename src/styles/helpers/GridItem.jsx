@@ -13,15 +13,17 @@ export const GridItem = ({ Component }) => {
     )
 }
 
-
-export const GridItems = ({ Component, datas }) => {
-    if (!(datas instanceof Array)) throw new Error("Data doit être un tableau.")
+// Non tester
+export const GridItems = ({ Component, data }) => {
+    if (!(data instanceof Array)) throw new Error("Data doit être un tableau.")
+    const listComponent = data.map((d) => {
+        return <Grid key={d} item md={3} sm={6}>{<Component data={d} />}</Grid>
+    })
+    
     return (
         <Container>
             <Grid container spacing={4} sx={{ justifyContent: "center" }}>
-                {datas.map((data) => {
-                    return <Grid item md={3} sm={6}>{<Component data={data} />}</Grid>
-                })}
+                {listComponent}
             </Grid>
         </Container>
     )

@@ -2,16 +2,36 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { Typography, Button, Avatar, CardHeader } from '@mui/material';
+import TitleItem from '../../styles/helpers/TitleItem';
+import { Container, Grid } from '@mui/material'
+
+
 
 export function Club() {
   return (
-    <div>Clubs</div>
-  )
+    <>
+      <TitleItem title={"Clubs"} />
+      <ClubList />
+
+
+
+    </>)
 }
 
 export function ClubList() {
+  const data = [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12]
+  if (!(data instanceof Array)) throw new Error("Data doit être un tableau.")
+
   return (
-    <div>ClubList</div>
+    <Container>
+      <Grid container spacing={4} sx={{ justifyContent: "center" }}>
+        {
+          data.map((d) => {
+            return <Grid key={d} item md={3} sm={6}>{<ClubCard data={d} />}</Grid>
+          })
+        }
+      </Grid>
+    </Container>
   )
 }
 

@@ -9,9 +9,8 @@ import FeedIcon from '@mui/icons-material/Feed';
 import GroupIcon from '@mui/icons-material/Group';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
-import { Link } from 'react-router-dom';
-import React from 'react'
 import MenuItemIcon from "../../styles/helpers/MenuItemIcon";
+import React from 'react'
 
 export default function NavBarMobile({ url }) {
 
