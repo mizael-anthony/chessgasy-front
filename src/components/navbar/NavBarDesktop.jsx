@@ -7,12 +7,13 @@ import GroupIcon from '@mui/icons-material/Group';
 import FeedIcon from '@mui/icons-material/Feed';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import LinkItemIcon from "../../styles/helpers/LinkItemIcon";
-import { Divider } from "@mui/material";
+import { Divider} from "@mui/material";
 
 
 export default function NavBarDesktop({ url }) {
     return (
         <NavBarContainer>
+            <img src="./logo-chess3.png" width={200}/>
             <NavBarHeader>ChessGasy</NavBarHeader>
             <LinkList type="row">
 

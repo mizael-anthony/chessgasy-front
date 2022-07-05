@@ -17,7 +17,7 @@ function App() {
 
 
   useEffect(() => {
-    document.title = "MadaChess - Acceuil"
+    document.title = "ChessGasy - Acceuil"
   }, [])
 
 
