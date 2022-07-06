@@ -27,7 +27,9 @@ export default function NavBarMobile({ url }) {
 
   return (
     <NavBarContainer>
-      <Box>
+      <Box 
+        sx={{display: 'flex'}}
+      >
         <IconButton onClick={handleOpenNavMenu}>
           <MenuIcon fontSize="large" />
         </IconButton>
@@ -43,15 +45,15 @@ export default function NavBarMobile({ url }) {
         <MenuItemIcon url={url.players} linkName={"Joueurs"} Icon={<GroupIcon/>} />
 
         </Menu>
-      </Box>
 
 
       <NavBarHeader
         textAlign={"center"}
-      >
+        >
         ChessGasy
       </NavBarHeader>
-      <img src="./logo-chess3.png" width={150}/>
+      <img src="./logo-chess3.png" width={100}/>
+        </Box>
 
 
       <LinkList

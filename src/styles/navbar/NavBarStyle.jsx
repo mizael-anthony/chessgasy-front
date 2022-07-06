@@ -1,7 +1,7 @@
 import { AppBar, Box, List, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Colors } from "../theme/Theme";
-
+import '@fontsource/montez'
 
 
 // Container
@@ -10,8 +10,8 @@ export const NavBarContainer = styled(Box)(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '2px 8px',
-    position: 'absolute'
+    padding: '0px',
+    position: 'absolute',
 
 
 
@@ -23,7 +23,8 @@ export const NavBarHeader = styled(Typography)(() => ({
 
     padding: '4px',
     flexGrow: 1,
-    fontSize: '3em',
+    fontSize: '4em',
+    fontFamily: '"Montez", "cursive"',
     color: Colors.stalegrey
 
 
@@ -33,9 +34,10 @@ export const NavBarHeader = styled(Typography)(() => ({
 export const LinkList = styled(List)(({ type }) => ({
 
     display: type === 'row' ? 'flex' : 'block',
-    padding: '3px',
-    flexGrow: 1,
+    flexGrow: 3,
     fontSize: '1em',
+    justifyContent : 'center',
+    alignItems : 'center',
     color: Colors.stalegrey
 
 
@@ -47,14 +49,14 @@ export const ActionContainerMobile = styled(Box)(() => ({
 
 
     display : 'flex',
-    background : Colors.light,
+    background : Colors.dark,
     position : 'fixed',
     bottom : 0,
     left : 0,
     width : '100%',
     alignItems : 'center',
     zIndex : 99,
-    borderTop : ` 1px solid ${Colors.midnightblue}`
+    borderTop : ` 1px solid ${Colors.light}`
 
 
 

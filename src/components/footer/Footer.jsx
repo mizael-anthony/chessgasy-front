@@ -20,10 +20,10 @@ export default function Footer() {
     return (
         <Box
             sx={{
-                marginTop: '50px',
+                marginTop: '40px',
                 backgroundColor: Colors.darkreact,
                 color: Colors.light,
-                p: { xs: 5, md: 10 },
+                p: { xs: 4, md: 10 },
                 pt: 10,
                 pb: 10,
                 fontSize: { xs: "12px", md: "14px" },
@@ -33,7 +33,7 @@ export default function Footer() {
                 <Grid item md={6} lg={4}>
                     <FooterTitle variant="body1">A propos</FooterTitle>
                     <Typography variant="caption2">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt blanditiis quo hic unde ratione omnis ea ut deleniti? Sequi debitis veritatis cupiditate deleniti delectus architecto! Rem, labore tenetur! Saepe, voluptates!
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt blanditiis quo hic unde ratione omnis ea ut deleniti? Sequi debitis veritatis
                     </Typography>
                     <Box
                         sx={{
@@ -51,7 +51,7 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item  md={6} lg={2}>
+                <Grid item  md={6} lg={3}>
                     <FooterTitle variant="body1">Informations</FooterTitle>
 
                     <List>
@@ -96,7 +96,7 @@ export default function Footer() {
 
                 </Grid>
             </Grid>
-            <Box sx={{display: 'flex', justifyContent:'center'}}><Typography variant="caption2" textAlign="center">Copyright Chessgasy Tout droit reservé</Typography></Box>
+            <Box sx={{display: 'flex', justifyContent:'center', marginTop:'10px'}}><Typography variant="caption2" textAlign="center">Copyright Chessgasy Tout droit reservé</Typography></Box>
         </Box>
     )
 }

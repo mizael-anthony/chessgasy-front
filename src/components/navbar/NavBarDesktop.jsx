@@ -13,7 +13,7 @@ import { Divider } from "@mui/material";
 export default function NavBarDesktop({ url }) {
     return (
 
-    <NavBarContainer sx={{right: '10px'}}>
+    <NavBarContainer sx={{right: 10}}>
             <img src="./logo-chess3.png" width={200} />
             <NavBarHeader>ChessGasy</NavBarHeader>
             <LinkList type="row">
