@@ -26,11 +26,11 @@ export default function Footer() {
                 p: { xs: 4, md: 10 },
                 pt: 10,
                 pb: 10,
-                fontSize: { xs: "12px", md: "14px" },
+                fontSize: { xs: "12px", md: "14px" }
             }}
         >
-            <Grid container spacing={4}>
-                <Grid item md={6} lg={4}>
+            <Grid container spacing={2}>
+                <Grid item md={6} lg={6}>
                     <FooterTitle variant="body1">A propos</FooterTitle>
                     <Typography variant="caption2">
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt blanditiis quo hic unde ratione omnis ea ut deleniti? Sequi debitis veritatis
@@ -51,19 +51,8 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item  md={6} lg={3}>
-                    <FooterTitle variant="body1">Informations</FooterTitle>
 
-                    <List>
-                        <ListItemText><Typography>A propos</Typography></ListItemText>
-                        <ListItemText><Typography>Nos projets</Typography></ListItemText>
-                        <ListItemText><Typography>Termes et conditions</Typography></ListItemText>
-                    </List>
-
-                </Grid>
-
-
-                <Grid item xs={3} md={6} lg={3}>
+                <Grid item xs={4} md={6} lg={4}>
                     <FooterTitle variant="body1">Autres liens</FooterTitle>
                     <List>
                         <ListItemText><Typography>Remerciements</Typography></ListItemText>
@@ -73,7 +62,7 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item md={6} lg={2}>
+                <Grid item xs={4} md={6} lg={2}>
                     <FooterTitle variant="body1">Contact</FooterTitle>
                     <List>
                         <ListItem disablePadding>
