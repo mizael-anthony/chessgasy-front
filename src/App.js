@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material';
 import Theme, { Colors } from './styles/theme/Theme';
@@ -11,6 +11,7 @@ import Footer from './components/footer/Footer';
 import { Routes, Route } from 'react-router-dom';
 import {Actuality} from './components/pages/Actuality'
 import {Club} from './components/pages/Club'
+import { Account, ChangePassword, Login, Register } from './components/pages/Account';
 
 
 function App() {
@@ -27,9 +28,12 @@ function App() {
     <ThemeProvider theme={Theme}>
 
       <Container
+
         maxWidth="xl"
         sx={{
-          background: Colors.light
+          background: Colors.darkslategrey,
+          padding: {md:'0px', xs:'0px', sm:'0px'}
+
         }
 
         }>
@@ -42,6 +46,11 @@ function App() {
           <Route path="clubs" element={<Club/>}/>
           <Route path="players" element={<Player/>}/>
           <Route path="infos" element={<Infos/>}/>
+          <Route path="profil" element={<Account/>}>
+            <Route index element={<Login/>}/>
+            <Route path="reset-password" element={<ChangePassword/>}/>
+            <Route path="register" element={<Register/>}/>
+          </Route>
         </Routes>
         <Footer/>
 

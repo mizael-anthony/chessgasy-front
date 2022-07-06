@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import TitleItem from '../../styles/helpers/TitleItem';
+import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
 
 

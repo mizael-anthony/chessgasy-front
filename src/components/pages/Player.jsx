@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { Avatar, Link, Box } from '@mui/material';
 import { Colors } from '../../styles/theme/Theme';
-import TitleItem from '../../styles/helpers/TitleItem';
+import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
 
 
@@ -10,7 +10,7 @@ import { Container, Grid } from '@mui/material'
 export function Player() {
   return (
     <>
-      <TitleItem title={"Joueurs"} />
+      <TitleItem title={"Liste des joueurs"} />
       <PlayerList/>
     </>
 

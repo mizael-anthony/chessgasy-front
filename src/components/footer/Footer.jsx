@@ -24,8 +24,8 @@ export default function Footer() {
                 backgroundColor: Colors.darkreact,
                 color: Colors.light,
                 p: { xs: 5, md: 10 },
-                pt: 12,
-                pb: 12,
+                pt: 10,
+                pb: 10,
                 fontSize: { xs: "12px", md: "14px" },
             }}
         >
@@ -37,33 +37,33 @@ export default function Footer() {
                     </Typography>
                     <Box
                         sx={{
-                            mt: 3,
+                            mt: 1,
                             justifyContent: 'center'
 
                         }}
                     >
-                        <Link href="https://www.facebook.com"><FacebookIcon fontSize='large' /></Link>
-                        <Link href="https://www.twitter.com"><TwitterIcon fontSize='large' /></Link>
-                        <Link href="https://www.instagram.com"><InstagramIcon fontSize='large' /></Link>
-                        <Link href="https://www.linkedin.com"><LinkedInIcon fontSize='large' /></Link>
+                        <Link style={{color: 'inherit'}} href="https://www.facebook.com"><FacebookIcon fontSize='large' /></Link>
+                        <Link style={{color: 'inherit'}} href="https://www.twitter.com"><TwitterIcon fontSize='large' /></Link>
+                        <Link style={{color: 'inherit'}} href="https://www.instagram.com"><InstagramIcon fontSize='large' /></Link>
+                        <Link style={{color: 'inherit'}} href="https://www.linkedin.com"><LinkedInIcon fontSize='large' /></Link>
 
                     </Box>
 
                 </Grid>
 
-                <Grid item md={6} lg={3}>
+                <Grid item  xs={4} md={6} lg={2}>
                     <FooterTitle variant="body1">Informations</FooterTitle>
 
                     <List>
                         <ListItemText><Typography>A propos</Typography></ListItemText>
-                        <ListItemText><Typography>Nos attente</Typography></ListItemText>
+                        <ListItemText><Typography>Nos projets</Typography></ListItemText>
                         <ListItemText><Typography>Termes et conditions</Typography></ListItemText>
                     </List>
 
                 </Grid>
 
 
-                <Grid item md={6} lg={3}>
+                <Grid item xs={3} md={6} lg={3}>
                     <FooterTitle variant="body1">Autres liens</FooterTitle>
                     <List>
                         <ListItemText><Typography>Remerciements</Typography></ListItemText>
@@ -73,7 +73,7 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item md={6} lg={2}>
+                <Grid item xs={2} md={6} lg={2}>
                     <FooterTitle variant="body1">Contact</FooterTitle>
                     <List>
                         <ListItem disablePadding>
@@ -96,7 +96,7 @@ export default function Footer() {
 
                 </Grid>
             </Grid>
-            <Typography variant="caption2" textAlign="center">Copyright Chessgasy Tout droit reservé</Typography>
+            <Box sx={{display: 'flex', justifyContent:'center'}}><Typography variant="caption2" textAlign="center">Copyright Chessgasy Tout droit reservé</Typography></Box>
         </Box>
     )
 }

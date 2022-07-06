@@ -10,7 +10,8 @@ export const NavBarContainer = styled(Box)(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '2px 8px'
+    padding : '0px',
+    position : 'absolute'
 
 
 }))
@@ -31,7 +32,7 @@ export const NavBarHeader = styled(Typography)(() => ({
 export const LinkList = styled(List)(({ type }) => ({
 
     display: type === 'row' ? 'flex' : 'block',
-    padding: '3px',
+    padding: '4px',
     flexGrow: 1,
     fontSize: '1em',
     color: Colors.stalegrey
@@ -50,6 +51,7 @@ export const ActionContainerMobile = styled(Box)(() => ({
     bottom : 0,
     left : 0,
     width : '100%',
+    justifyContent: 'center',
     alignItems : 'center',
     zIndex : 99,
     borderTop : ` 1px solid ${Colors.midnightblue}`

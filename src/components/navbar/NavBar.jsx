@@ -24,6 +24,7 @@ export default function NavBar(){
         'clubs' : 'clubs',
         'players' : 'players',
         'infos' : 'infos',
+        'profil' : 'profil',
     }
 
     return(

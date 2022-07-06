@@ -7,7 +7,7 @@ export const BannerContainer = styled(Box)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    height: '100%', 
     padding: '0px 0px',
     background: Colors.grey,
     [theme.breakpoints.down('sm')]: {
@@ -19,13 +19,13 @@ export const BannerContainer = styled(Box)(({ theme }) => ({
 // Image
 export const BannerImage = styled("img")(({src, theme}) => ({
     src : `url(${src})`,
-    width : '500px',
+    width : '100%',
+    height: '800px',
     [theme.breakpoints.down('md')]:{
-        width: '350px'
+        height: '350px'
     },
     [theme.breakpoints.down('sm')]:{
-        width: '320px',
-        width: '300px',
+        height: '300px'
     },
 }))
 
