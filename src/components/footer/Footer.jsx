@@ -51,7 +51,7 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item  xs={4} md={6} lg={2}>
+                <Grid item  md={6} lg={2}>
                     <FooterTitle variant="body1">Informations</FooterTitle>
 
                     <List>
@@ -73,7 +73,7 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item xs={2} md={6} lg={2}>
+                <Grid item md={6} lg={2}>
                     <FooterTitle variant="body1">Contact</FooterTitle>
                     <List>
                         <ListItem disablePadding>
