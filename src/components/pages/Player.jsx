@@ -3,6 +3,7 @@ import { Avatar, Link, Box } from '@mui/material';
 import { Colors } from '../../styles/theme/Theme';
 import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
+import Banner from '../banner/Banner';
 
 
 
@@ -10,6 +11,8 @@ import { Container, Grid } from '@mui/material'
 export function Player() {
   return (
     <>
+            <Banner />
+
       <TitleItem title={"Liste des joueurs"} />
       <PlayerList/>
     </>

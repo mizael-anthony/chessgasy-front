@@ -5,10 +5,13 @@ import { Typography, Button, Avatar, CardHeader, AvatarGroup } from '@mui/materi
 import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
 import { PaginationBox } from '../../helpers/PaginationBox';
+import Banner from '../banner/Banner';
 
 export function Club() {
   return (
     <>
+      <Banner />
+
       <TitleItem title={"Liste des clubs"} />
       <ClubList />
       <PaginationBox />

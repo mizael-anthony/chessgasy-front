@@ -2,10 +2,10 @@ import { useMediaQuery } from "@mui/material"
 import { useTheme } from "@mui/material"
 import NavBarDesktop from "./NavBarDesktop"
 import NavBarMobile from "./NavBarMobile"
+import { useState } from "react"
 
 
-
-export default function NavBar(){
+export default function NavBar({position}) {
 
     // Utiliser le thème par défaut pour savoir la taille de l'écran actuelle
     const theme = useTheme()
@@ -18,18 +18,20 @@ export default function NavBar(){
 
     // Url de chaque menu
     const urls = {
-        'home' : '/',
-        'news' : 'news',
-        'tournaments' : 'tournaments',
-        'clubs' : 'clubs',
-        'players' : 'players',
-        'infos' : 'infos',
-        'profil' : 'profil',
+        'home': '/',
+        'news': 'news',
+        'tournaments': 'tournaments',
+        'clubs': 'clubs',
+        'players': 'players',
+        'infos': 'infos',
+        'profil': 'profil',
     }
 
-    return(
+
+
+    return (
         <>
-            {matches ? <NavBarMobile url={urls}/>: <NavBarDesktop url={urls}/>}
+            {matches ? <NavBarMobile url={urls} position={position} /> : <NavBarDesktop url={urls} position={position} />}
         </>
     )
 

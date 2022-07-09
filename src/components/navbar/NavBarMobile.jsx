@@ -12,7 +12,7 @@ import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import MenuItemIcon from "../../helpers/MenuItemIcon";
 import React from 'react'
 
-export default function NavBarMobile({ url }) {
+export default function NavBarMobile({ url, position }) {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -26,7 +26,7 @@ export default function NavBarMobile({ url }) {
 
 
   return (
-    <NavBarContainer>
+    <NavBarContainer sx={{backgroundColor:'#fff', position:{position}}}>
       <Box 
         sx={{display: 'flex'}}
       >

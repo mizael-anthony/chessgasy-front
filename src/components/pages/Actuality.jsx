@@ -5,13 +5,16 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
+import Banner from '../banner/Banner';
 
 
 export function Actuality() {
   return (
     <>
+      <Banner />
+
       <TitleItem title={"Listes des actualités"} />
-      <ActualityList/>
+      <ActualityList />
 
 
 

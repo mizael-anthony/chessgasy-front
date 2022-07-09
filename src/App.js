@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material';
 import Theme, { Colors } from './styles/theme/Theme';
@@ -15,6 +15,9 @@ import { Account, ChangePassword, Login, Register } from './components/pages/Acc
 
 
 function App() {
+
+  const [position, setPosition] = useState('absolute')
+
 
 
   useEffect(() => {
@@ -38,7 +41,7 @@ function App() {
 
         }>
 
-        <NavBar/>
+        <NavBar position={position}/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="news" element={<Actuality/>}/>
@@ -46,7 +49,7 @@ function App() {
           <Route path="clubs" element={<Club/>}/>
           <Route path="players" element={<Player/>}/>
           <Route path="infos" element={<Infos/>}/>
-          <Route path="profil" element={<Account/>}>
+          <Route path="profil" element={<Account changePosition={setPosition}/>}>
             <Route index element={<Login/>}/>
             <Route path="reset-password" element={<ChangePassword/>}/>
             <Route path="register" element={<Register/>}/>

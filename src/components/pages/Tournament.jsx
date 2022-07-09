@@ -10,15 +10,17 @@ import Button from '@mui/material/Button'
 import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
 import { PaginationBox } from '../../helpers/PaginationBox';
-
+import Banner from '../banner/Banner';
 
 export function Tournament() {
   return (
     <>
+      <Banner />
+
       <TitleItem title={"Liste des tournois"} />
       <TournamentList />
       <PaginationBox />
-      
+
 
     </>
   )

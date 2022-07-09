@@ -20,7 +20,7 @@ export default function Footer() {
     return (
         <Box
             sx={{
-                marginTop: '40px',
+                marginTop: {xs:"0px", md:"20px", lg:"40px"},
                 backgroundColor: Colors.darkreact,
                 color: Colors.light,
                 p: { xs: 4, md: 10 },
@@ -52,7 +52,7 @@ export default function Footer() {
                 </Grid>
 
 
-                <Grid item xs={4} md={6} lg={4}>
+                <Grid item xs={5} md={6} lg={4}>
                     <FooterTitle variant="body1">Autres liens</FooterTitle>
                     <List>
                         <ListItemText><Typography>Remerciements</Typography></ListItemText>
@@ -62,7 +62,7 @@ export default function Footer() {
 
                 </Grid>
 
-                <Grid item xs={4} md={6} lg={2}>
+                <Grid item xs={2} md={6} lg={2}>
                     <FooterTitle variant="body1">Contact</FooterTitle>
                     <List>
                         <ListItem disablePadding>
