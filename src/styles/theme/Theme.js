@@ -15,7 +15,9 @@ export const Colors = {
     grey : '#808080',
     darkreact: '#20232a',
     wood: '#DEB887',
-    saddlebrown: '#8B4513'
+    saddlebrown: '#8B4513',
+    // Chess bois
+    
 
 }
 

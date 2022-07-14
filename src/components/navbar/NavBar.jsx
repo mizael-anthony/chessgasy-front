@@ -2,10 +2,10 @@ import { useMediaQuery } from "@mui/material"
 import { useTheme } from "@mui/material"
 import NavBarDesktop from "./NavBarDesktop"
 import NavBarMobile from "./NavBarMobile"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 
-
-export default function NavBar({position}) {
+export default function NavBar() {
 
     // Utiliser le thème par défaut pour savoir la taille de l'écran actuelle
     const theme = useTheme()
@@ -26,6 +26,15 @@ export default function NavBar({position}) {
         'infos': 'infos',
         'profil': 'profil',
     }
+
+    // Modifier position à chaque onglet
+    let location = useLocation()
+    const [position, setPosition] = useState('absolute')
+
+    useEffect(() => {
+        if (location.pathname.includes("profil")) setPosition('static')
+        else setPosition('absolute')
+    }, [location])
 
 
 

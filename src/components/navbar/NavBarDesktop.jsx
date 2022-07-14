@@ -8,18 +8,13 @@ import FeedIcon from '@mui/icons-material/Feed';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import LinkItemIcon from "../../helpers/LinkItemIcon";
 import { Divider } from "@mui/material";
-import { useState } from "react";
-
 
 export default function NavBarDesktop({ url , position}) {
 
-    
-
-
     return (
 
-    <NavBarContainer sx={{backgroundColor:'#fff', position:{position}}}>
-            <img src="./logo-chess3.png" width={200} />
+    <NavBarContainer sx={{position:{position}}}>
+            <img src="./logo-chess4.ico" width={100} />
             <NavBarHeader>ChessGasy</NavBarHeader>
             <LinkList type="row">
 

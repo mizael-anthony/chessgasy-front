@@ -8,7 +8,7 @@ import {Player} from './components/pages/Player';
 import Infos from './components/pages/Infos';
 import {Tournament} from './components/pages/Tournament';
 import Footer from './components/footer/Footer';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import {Actuality} from './components/pages/Actuality'
 import {Club} from './components/pages/Club'
 import { Account, ChangePassword, Login, Register } from './components/pages/Account';
@@ -16,13 +16,17 @@ import { Account, ChangePassword, Login, Register } from './components/pages/Acc
 
 function App() {
 
-  const [position, setPosition] = useState('absolute')
+
+  let location = useLocation()
+  const [title, setTitle] = useState('Acceuil')
 
 
 
   useEffect(() => {
-    document.title = "ChessGasy - Acceuil"
-  }, [])
+    document.title = `ChessGasy - ${title}`
+     
+    
+  }, [location])
 
 
 
@@ -40,8 +44,7 @@ function App() {
         }
 
         }>
-
-        <NavBar position={position}/>
+        <NavBar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="news" element={<Actuality/>}/>
@@ -49,7 +52,7 @@ function App() {
           <Route path="clubs" element={<Club/>}/>
           <Route path="players" element={<Player/>}/>
           <Route path="infos" element={<Infos/>}/>
-          <Route path="profil" element={<Account changePosition={setPosition}/>}>
+          <Route path="profil" element={<Account/>}>
             <Route index element={<Login/>}/>
             <Route path="reset-password" element={<ChangePassword/>}/>
             <Route path="register" element={<Register/>}/>

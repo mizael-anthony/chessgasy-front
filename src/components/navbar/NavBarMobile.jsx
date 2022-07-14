@@ -26,7 +26,7 @@ export default function NavBarMobile({ url, position }) {
 
 
   return (
-    <NavBarContainer sx={{backgroundColor:'#fff', position:{position}}}>
+    <NavBarContainer sx={{position:{position}}}>
       <Box 
         sx={{display: 'flex'}}
       >

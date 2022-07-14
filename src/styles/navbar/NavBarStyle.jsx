@@ -1,4 +1,4 @@
-import { AppBar, Box, List, Typography } from "@mui/material";
+import { Box, List, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Colors } from "../theme/Theme";
 import '@fontsource/montez'
@@ -11,7 +11,6 @@ export const NavBarContainer = styled(Box)(() => ({
     justifyContent: 'center',
     alignItems: 'center',
     padding: '0px',
-    position: 'absolute',
 
 
 
