@@ -31,8 +31,9 @@ export default function Adress() {
 
 
             <TextField
+                type="text"
                 label="Quatier"
-                placeholder="Entrer votre"
+                placeholder="Entrer votre quartier"
                 required
             />
 
