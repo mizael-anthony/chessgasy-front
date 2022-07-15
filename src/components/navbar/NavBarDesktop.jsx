@@ -8,12 +8,13 @@ import FeedIcon from '@mui/icons-material/Feed';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import LinkItemIcon from "../../helpers/LinkItemIcon";
 import { Divider } from "@mui/material";
+import { Colors } from "../../styles/theme/Theme";
 
 export default function NavBarDesktop({ url , position}) {
 
     return (
 
-    <NavBarContainer sx={{position:{position}}}>
+    <NavBarContainer sx={{backgroundColor: Colors.dark, position:{position}}}>
             <img src="./logo-chess4.ico" width={100} />
             <NavBarHeader>ChessGasy</NavBarHeader>
             <LinkList type="row">

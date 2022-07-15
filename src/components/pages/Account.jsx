@@ -7,6 +7,7 @@ import {
 } from "@mui/material"
 import { Link, Outlet } from "react-router-dom"
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonIcon from '@mui/icons-material/Person';
 import { Colors } from "../../styles/theme/Theme";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -16,6 +17,7 @@ import { useState } from 'react'
 
 
 export function Account() {
+
 
     return (
         <Outlet />
@@ -30,7 +32,7 @@ export const Login = () => {
             <Paper elevation={10} style={{ padding: 30, height: '70vh', width: 350, margin: '20px auto' }}>
                 <Grid align={'center'}>
                     <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 56, height: 56 }}><LockOutlinedIcon /></Avatar>
-                    <Typography variant="h4">Connexion</Typography>
+                    <Typography variant="h5">Connexion</Typography>
                 </Grid>
                 <TextField
                     placeholder="Entrer votre nom d'utilisateur"
@@ -76,9 +78,9 @@ export const Login = () => {
 
 export const Register = () => {
 
+
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.down('md'))
-
     const [sex, setSex] = useState('Homme')
     const [birthday, setBirthday] = useState(new Date())
 
@@ -89,6 +91,24 @@ export const Register = () => {
                 <Stack spacing={2}>
                     <FormGroup>
                         <Typography variant="h4">Compte</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 98, height: 98 }}>
+                                <PersonIcon />
+                            </Avatar>
+                        </Box>
+                        <Button
+                            variant="contained"
+                            component="label"
+                            sx={{ width: 'fit-content', margin: '5px auto' }}
+
+                        >
+                            Changer votre profil
+                            <input
+                                type="file"
+                                hidden
+                            />
+                        </Button>
+
                         <TextField
                             label="Nom d'utilisateur"
                             placeholder="Entrer votre nom d'utilisateur"
@@ -108,6 +128,9 @@ export const Register = () => {
                             required
                         />
                     </FormGroup>
+
+
+
 
                     <FormGroup>
                         <Typography variant="h4">Informations personnelles</Typography>
@@ -226,25 +249,224 @@ export const Register = () => {
     )
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const UserProfil = () => {
+    const theme = useTheme()
+    const matches = useMediaQuery(theme.breakpoints.down('md'))
+
+    const [sex, setSex] = useState('Homme')
+    const [birthday, setBirthday] = useState(new Date())
+
+    return (
+        <Stack spacing={3} component="form">
+            <Paper elevation={10} style={{ padding: 30, margin: '20px auto' }}>
+                <Typography variant="h3" textAlign={'center'}>Mon profil</Typography>
+
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid item xs={2} sm={4} md={3}>
+                        <Avatar src={'./wallhaven-2kg97y.jpg'} alt="Photo" sx={{ width: 128, height: 128 }} />
+
+                        <Button
+                            variant="contained"
+                            component="label"
+
+                        >
+                            Changer de photo
+                            <input
+                                type="file"
+                                hidden
+                            />
+                        </Button>
+                        <TextField
+                            label={"Nom d'utilisateur"}
+                            defaultValue={"Username"}
+                            required
+                        />
+                        <TextField
+                            label="Contact"
+                            defaultValue="Valeur"
+                            required
+                        />
+                    </Grid>
+
+                    <Grid item xs={2} sm={4} md={3}>
+                        <TextField
+                            label="Nom"
+                            defaultValue="Valeur"
+                            required
+                        />
+
+                        <TextField
+                            label="Prénoms"
+                            defaultValue="Valeur"
+                            required
+
+                        />
+
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+
+                            {
+                                !matches ?
+                                    (<DesktopDatePicker
+                                        label="Date de naissance"
+                                        inputFormat="MM/dd/yyyy"
+                                        value={birthday}
+                                        onChange={(newBirthday) => {
+                                            setBirthday(newBirthday)
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />) :
+                                    (<MobileDatePicker
+                                        label="Date de naissance"
+                                        inputFormat="MM/dd/yyyy"
+                                        value={birthday}
+                                        onChange={(newBirthday) => {
+                                            setBirthday(newBirthday)
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />)
+                            }
+                        </LocalizationProvider>
+
+
+                        <FormControl>
+                            <FormLabel>Sexe</FormLabel>
+                            <RadioGroup
+                                row
+                                value={sex}
+                                onChange={(event) => {
+                                    setSex(event.target.value)
+                                }}
+                            >
+                                <FormControlLabel value="Homme" control={<Radio />} label="Homme" />
+                                <FormControlLabel value="Femme" control={<Radio />} label="Femme" />
+                            </RadioGroup>
+
+                        </FormControl>
+
+                    </Grid>
+
+
+                    <Grid item xs={2} sm={4} md={3}>
+                        <TextField
+                            label="Province"
+                            defaultValue="Valeur"
+                            required
+                            InputProps={{
+                                readOnly: true
+                            }}
+                        />
+
+                        <TextField
+                            label="Région"
+                            defaultValue="Valeur"
+                            InputProps={{
+                                readOnly: true
+                            }}
+                            required
+                        />
+
+                        <TextField
+                            label="Commune"
+                            defaultValue="Valeur"
+                            InputProps={{
+                                readOnly: true
+                            }}
+                            required
+                        />
+
+
+                        <TextField
+                            label="Quatier"
+                            defaultValue="Valeur"
+                            required
+                        />
+                    </Grid>
+
+
+                    <Grid item xs={2} sm={4} md={3}>
+
+                        <Button type={'submit'} variant="contained">
+                            Modifier mon profil
+                        </Button>
+
+
+                        <Button type={'submit'} variant="contained">
+
+                            <Link to={'reset-password'} style={{ textDecoration: 'none', color: 'white' }}>
+                                Changer mon mot de passe
+                            </Link>
+                        </Button>
+
+                        <Button variant="contained">
+                                Se deconnecter
+                        </Button>
+
+                    </Grid>
+
+
+                </Grid>
+            </Paper>
+        </Stack>
+    )
+}
+
 export const ChangePassword = () => {
     return (
-        <Box
-            sx={{ display: 'flex', justifyContent: 'center' }}
-        >
-            <FormControl>
-                <Typography variant="h2">Renouvellement mot de passe</Typography>
+        <Grid>
 
+            <Paper elevation={10} style={{ padding: 30, width: 350, margin: '20px auto' }}>
+                <Grid align={'center'}>
+                    <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 56, height: 56 }}><LockOutlinedIcon /></Avatar>
+                    <Typography variant="h5">Réinitialisation mot de passe</Typography>
+                </Grid>
                 <TextField
-                    helperText="Entrer votre nouveau mot de passe"
                     label="Nouveau mot de passe"
+                    placeholder="Entrer votre nouveau mot de passe"
+                    fullWidth
+                    required
+                    style={{ margin: '7px auto' }}
                 />
                 <TextField
-                    helperText="Confirmer votre nouveau mot de passe"
-                    label="Confirmation du mot de passe"
+                    label="Confirmation mot de passe"
+                    placeholder="Répeter votre mot de passe"
+                    fullWidth
+                    required
+                    type={'password'}
+                    style={{ margin: '7px auto' }}
+
                 />
-                <Button variant="contained">Terminer</Button>
-            </FormControl>
-        </Box>
+
+                <Button variant="contained" type={'submit'} style={{ margin: '3px auto' }} fullWidth >
+                    Reinitialiser mot de passe
+                </Button>
+
+
+
+            </Paper>
+        </Grid>
     )
 }
 

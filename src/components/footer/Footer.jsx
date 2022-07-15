@@ -7,21 +7,16 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 
 
-import { Box, Grid, Link, Typography } from "@mui/material";
+import { Box, Grid, Link, Typography, ListItem, ListItemText, List } from "@mui/material";
 import { FooterTitle } from "../../styles/footer/FooterStyle";
 import { Colors } from "../../styles/theme/Theme";
-
-import ListItemText from '@mui/material/ListItemText';
-import List from '@mui/material/List';
-import { ListItemIcon, ListItemButton, ListItem } from '@mui/material';
-
 
 export default function Footer() {
     return (
         <Box
             sx={{
                 marginTop: {xs:"0px", md:"20px", lg:"40px"},
-                backgroundColor: Colors.darkreact,
+                backgroundColor: Colors.dark,
                 color: Colors.light,
                 p: { xs: 4, md: 10 },
                 pt: 10,

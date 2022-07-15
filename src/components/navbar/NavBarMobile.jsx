@@ -28,7 +28,7 @@ export default function NavBarMobile({ url, position }) {
   return (
     <NavBarContainer sx={{position:{position}}}>
       <Box 
-        sx={{display: 'flex'}}
+        sx={{display:'flex', justifyContent:'center'}}
       >
         <IconButton onClick={handleOpenNavMenu}>
           <MenuIcon fontSize="large" />
@@ -52,8 +52,8 @@ export default function NavBarMobile({ url, position }) {
         >
         ChessGasy
       </NavBarHeader>
-      <img src="./logo-chess3.png" width={100}/>
-        </Box>
+      <img src="./logo-chess4.ico" width={80} alt="logo"/>
+      </Box>
 
 
       <LinkList
@@ -61,7 +61,7 @@ export default function NavBarMobile({ url, position }) {
         <ActionContainerMobile>
           <LinkItemIcon name="Acceuil" url={url.home} Icon={<HomeIcon fontSize="large" />} />
           <LinkItemIcon name="Infos" url={url.infos} Icon={<InfoIcon fontSize="large" />} />
-          <LinkItemIcon name="Mon profil" Icon={<PersonIcon fontSize="large" />} />
+          <LinkItemIcon name="Mon profil" url={url.profil} Icon={<PersonIcon fontSize="large" />} />
         </ActionContainerMobile>
       </LinkList>
     </NavBarContainer>
