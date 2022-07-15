@@ -76,6 +76,8 @@ export const Login = () => {
     )
 }
 
+
+// Mila ovaina anle StepperItems
 export const Register = () => {
 
 
@@ -278,14 +280,15 @@ export const UserProfil = () => {
 
     const [sex, setSex] = useState('Homme')
     const [birthday, setBirthday] = useState(new Date())
+    const [player, setPlayer] = useState({})
 
     return (
         <Stack spacing={3} component="form">
             <Paper elevation={10} style={{ padding: 30, margin: '20px auto' }}>
                 <Typography variant="h3" textAlign={'center'}>Mon profil</Typography>
 
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    <Grid item xs={2} sm={4} md={3}>
+                <Grid container spacing={{ xs: 2, md: 3 }}>
+                    <Grid item xs={2} sm={2} md={3}>
                         <Avatar src={'./wallhaven-2kg97y.jpg'} alt="Photo" sx={{ width: 128, height: 128 }} />
 
                         <Button
@@ -311,7 +314,7 @@ export const UserProfil = () => {
                         />
                     </Grid>
 
-                    <Grid item xs={2} sm={4} md={3}>
+                    <Grid item xs={2} sm={2} md={3}>
                         <TextField
                             label="Nom"
                             defaultValue="Valeur"
@@ -369,7 +372,7 @@ export const UserProfil = () => {
                     </Grid>
 
 
-                    <Grid item xs={2} sm={4} md={3}>
+                    <Grid item xs={2} sm={2} md={3}>
                         <TextField
                             label="Province"
                             defaultValue="Valeur"
@@ -406,28 +409,63 @@ export const UserProfil = () => {
                     </Grid>
 
 
-                    <Grid item xs={2} sm={4} md={3}>
-
-                        <Button type={'submit'} variant="contained">
-                            Modifier mon profil
-                        </Button>
 
 
-                        <Button type={'submit'} variant="contained">
+                    <Grid item xs={2} sm={2} md={3}>
+                        <TextField
+                            label="Titre"
+                            InputProps={{
+                                readOnly: true
+                            }}
+                            required
 
-                            <Link to={'reset-password'} style={{ textDecoration: 'none', color: 'white' }}>
-                                Changer mon mot de passe
-                            </Link>
-                        </Button>
+                        />
 
-                        <Button variant="contained">
-                                Se deconnecter
-                        </Button>
+                        <TextField
+                            label="ELO Standard"
+                            InputProps={{
+                                readOnly: true
+                            }}
+                            required
 
+                        />
+
+                        <TextField
+                            label="ELO Rapide"
+                            InputProps={{
+                                readOnly: true
+                            }}
+                            required
+                        />
+
+                        <TextField
+                            label="ELO Blitz"
+                            InputProps={{
+                                readOnly: true
+                            }}
+                            required
+                        />
                     </Grid>
 
 
                 </Grid>
+                <Box sx={{display:'flex', justifyContent:'space-between'}}>
+                    <Button type={'submit'} variant="contained">
+                        Modifier mon profil
+                    </Button>
+
+
+                    <Button variant="contained">
+
+                        <Link to={'reset-password'} style={{ textDecoration: 'none', color: 'white' }}>
+                            Changer mon mot de passe
+                        </Link>
+                    </Button>
+
+                    <Button variant="contained">
+                        Se deconnecter
+                    </Button>
+                </Box>
             </Paper>
         </Stack>
     )

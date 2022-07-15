@@ -6,6 +6,7 @@ import {
 import { useState } from "react"
 import Adress from "../components/pages/Adress"
 import Connexion from "../components/pages/Connexion"
+import Fide from "../components/pages/Fide"
 import Personnal from "../components/pages/Personnal"
 
 
@@ -16,8 +17,8 @@ export const StepperItems = () => {
 	const [activeStep, setActiveStep] = useState(0)
 
 	const [player, setPlayer] = useState({
-		username: '', password1: '', password2:'',
-		
+		username: '', password1: '', password2: '',
+
 	})
 
 
@@ -29,9 +30,17 @@ export const StepperItems = () => {
 		setActiveStep(preActiveStep => preActiveStep - 1)
 	}
 
+	const handleReset = () => {
+		setActiveStep(0)
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		console.log("mande")
+	}
 
 	function getSteps() {
-		return ["Compte", "Informations personnelles", "Adresse"]
+		return ["Compte", "Informations personnelles", "Informations FIDE", "Adresse"]
 	}
 
 
@@ -42,8 +51,9 @@ export const StepperItems = () => {
 			case 1:
 				return <Personnal />
 			case 2:
+				return <Fide />
+			case 3:
 				return <Adress />
-
 
 			default:
 				return "Etape inconnue"
@@ -53,53 +63,61 @@ export const StepperItems = () => {
 
 	return (
 		<Box
+
 			sx={{
 				width: '50%', margin: '1em auto',
 
 			}}
 		>
-			<Paper elevation={10} sx={{ padding: '10px' }}>
+			<form onSubmit={handleSubmit}>
+				<Paper elevation={10} sx={{ padding: '10px' }}>
 
 
 
-				<Stepper activeStep={activeStep} alternativeLabel>
-					{steps.map((label) => (
-						<Step key={label}>
-							<StepLabel>
-								{label}
-							</StepLabel>
+					<Stepper activeStep={activeStep} alternativeLabel>
+						{steps.map((label) => (
+							<Step key={label}>
+								<StepLabel>
+									{label}
+								</StepLabel>
 
 
 
-						</Step>
-					))}
+							</Step>
+						))}
 
-				</Stepper>
-
-
-				<>
-					{activeStep === steps.length ? (
-						<>
-							<Button variant="contained" type={'submit'}>
-								S'enregistrer
-							</Button>
-						</>
-					) : (
-						<>
-							{getStepsContents(activeStep)}
-							<Button variant="contained" onClick={handlePrev} disabled={activeStep === 0}>
-								Revenir
-							</Button>
-
-							<Button variant="contained" onClick={handleNext}>
-								{activeStep === steps.length - 1 ? "Terminer" : "Suivant"}
-							</Button>
+					</Stepper>
 
 
-						</>
+					<>
+						{activeStep === steps.length ? (
+							<>
+								<Button variant="contained" type={'submit'}>
+									S'enregistrer
+								</Button>
 
-					)}
-				</>
+								<Button variant="contained" onClick={handlePrev}>
+									Revenir
+								</Button>
+
+							</>
+						) : (
+							<>
+								{getStepsContents(activeStep)}
+								<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+									<Button variant="contained" onClick={handlePrev} disabled={activeStep === 0}>
+										Revenir
+									</Button>
+
+									<Button variant="contained" onClick={handleNext}>
+										{activeStep === steps.length - 1 ? "Terminer" : "Continuer"}
+									</Button>
+
+
+								</Box>
+							</>
+						)}
+					</>
 
 
 
@@ -107,8 +125,8 @@ export const StepperItems = () => {
 
 
 
-			</Paper>
-
+				</Paper>
+			</form>
 
 		</Box>
 	)

@@ -1,7 +1,7 @@
 import {
-    Typography, TextField, FormControl,
-    FormLabel, Radio, useMediaQuery,
-    useTheme, RadioGroup, FormControlLabel
+    Typography, TextField, FormControl, Button,
+    FormLabel, Radio, useMediaQuery, Box,
+    useTheme, RadioGroup, FormControlLabel, Avatar
 
 } from '@mui/material'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -9,6 +9,8 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react'
+import { Colors } from "../../styles/theme/Theme"
+import PersonIcon from '@mui/icons-material/Person';
 
 
 
@@ -20,21 +22,25 @@ export default function Personnal() {
     const [birthday, setBirthday] = useState(new Date())
     return (
         <>
-            <Typography variant="h4">Informations personnelles</Typography>
 
-            <TextField
-                label="Nom"
-                placeholder="Entrer votre nom"
-                required
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 98, height: 98 }}>
+                    <PersonIcon />
+                </Avatar>
+            </Box>
 
-            />
-
-            <TextField
-                label="Prénoms"
-                placeholder="Entrer vos prénoms"
-                required
-
-            />
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Button
+                    variant="contained"
+                    component="label"
+                >
+                    Changer de profil
+                    <input
+                        type="file"
+                        hidden
+                    />
+                </Button>
+            </Box>
 
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -112,39 +118,7 @@ export default function Personnal() {
 
             />
 
-            <TextField
-                label="Titre"
-                InputProps={{
-                    readOnly: true
-                }}
-                required
 
-            />
-
-            <TextField
-                label="ELO Standard"
-                InputProps={{
-                    readOnly: true
-                }}
-                required
-
-            />
-
-            <TextField
-                label="ELO Rapide"
-                InputProps={{
-                    readOnly: true
-                }}
-                required
-            />
-
-            <TextField
-                label="ELO Blitz"
-                InputProps={{
-                    readOnly: true
-                }}
-                required
-            />
 
 
 

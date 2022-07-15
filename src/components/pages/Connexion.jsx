@@ -1,13 +1,12 @@
 import {
-    Typography, Box, Button, TextField, Avatar, Grid, FormControl, Stack,
+    Box, Button, TextField, Grid, FormControl, Stack,
     InputLabel, OutlinedInput, InputAdornment,
 } from "@mui/material"
-import { Colors } from "../../styles/theme/Theme"
-import PersonIcon from '@mui/icons-material/Person';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
 import { useState } from "react";
+import IconButton from '@mui/material/IconButton';
+
 
 export default function Connexion() {
     const [passwordValue, showPasswordValue] = useState(false)
@@ -26,25 +25,8 @@ export default function Connexion() {
     return (
         <Box sx={{ padding: '30px' }}>
 
-            <form>
                 <Stack spacing={2}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 98, height: 98 }}>
-                            <PersonIcon />
-                        </Avatar>
-                    </Box>
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button
-                            variant="contained"
-                            component="label"
-                        >
-                            Changer de profil
-                            <input
-                                type="file"
-                                hidden
-                            />
-                        </Button>
-                    </Box>
+                
 
                     <TextField
                         label="Nom d'utilisateur"
@@ -100,7 +82,6 @@ export default function Connexion() {
 
                 </Stack>
 
-            </form>
 
         </Box >
     )
