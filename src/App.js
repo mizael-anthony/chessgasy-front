@@ -40,8 +40,8 @@ import constate from "constate"
 function usePlayer() {
   const [player, setPlayer] = useState({
     username: '', email: '', password1: '', password2: '',
-    photo: '', sex: '', birthday:'', contact:'',
-    lastname: '', firstname: '', title:'Titre', standard_elo: 0, rapid_elo: 0, blitz_elo: 0, 
+    photo: '', sex: '', birthday:'', contact:'', id_fide: '',
+    lastname: '', firstname: '', title:'', standard_elo: '', rapid_elo: '', blitz_elo: '', 
     province:'', region:'', town:'', quarter:'', isCompleted:false,
   })
   const changePlayer = useCallback((...p) => setPlayer(...p))
@@ -56,6 +56,7 @@ function usePlayer() {
 export const [PlayerProvider, usePlayerContext] = constate(usePlayer)
 
 function App() {
+  // console.log(process.env)
   // const [info,dispatch]=useReducer(reducer,{nom:"rolio",prenom:"warol"})
   // const emiter=useCallback((...arg)=>dispatch(...arg),[info])
   // console.log(info);

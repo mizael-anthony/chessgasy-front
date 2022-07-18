@@ -37,27 +37,63 @@ export default function Fide() {
 
 
     const [suggestions, setSuggestions] = useState([{
-        id:'', nom: '', prenoms: ''
+        id_fide: '', player_name: ''
     }])
 
-    const handleInputChangeLastName = (e) => {
-        // setSuggestions([{ nom: "lery" }])
-        let playersIdFide = []
-        const lastname = e.target.value
-        if (lastname?.length >= 4) {
-            API.getPlayerIdFIDE(lastname)
-            .then(data=>{
-                playersIdFide = [data]
-                console.log(playersIdFide)
-            })
-            .catch(error=>console.log(error))
+
+
+    const handleInputChangeFIDE = (e) => {
+        const player_name = e.target.value
+
+        if (player_name && player_name?.length >= 4) {
+            API.getPlayerIdFIDE(player_name)
+                .then(success => {
+                    // Asina animation eto
+                    const data = success.data
+                    setSuggestions(data)
+                })
+                .catch(error => {
+
+                })
         }
 
     }
 
+    const handleSelectPlayerFIDE = (e) => {
+        const value = e.target.value
+
+        if (value) {
+            const [selectedPlayerIdFide, selectedPlayerFullName] = value.split(',')
+            const id_fide = selectedPlayerIdFide
+            if (id_fide) {
+                API.getPlayerInfoFIDE(id_fide)
+                    .then(success => {
+                        // Asina animation eto
+                        const data = success.data
+                        setValue('lastname', data.nom)
+                        setValue('firstname', data.prenoms)
+                        setValue('title', data.titre)
+                        setValue('standard_elo', data.elo_standard)
+                        setValue('rapid_elo', data.elo_rapide)
+                        setValue('blitz_elo', data.elo_blitz)
+
+                    })
+                    .catch(error => {
+
+                    })
+            }
+        }
 
 
+    }
 
+    const showSuggestions = (suggestion) => {
+        if (suggestion.id_fide) {
+            return `${suggestion.id_fide}, ${suggestion.player_name}`
+        }
+        return ''
+
+    }
 
 
 
@@ -65,9 +101,16 @@ export default function Fide() {
         <>
             <Autocomplete
                 freeSolo
-                options={suggestions.map((option) => option.nom)}
-                onInputChange={(e) => handleInputChangeLastName(e)}
-                renderInput={(params) => <TextField {...params} label="Fide" />}
+                options={suggestions}
+                getOptionLabel={(suggestion) => showSuggestions(suggestion)}
+                onInputChange={(e) => handleInputChangeFIDE(e)}
+                onSelect={(e) => handleSelectPlayerFIDE(e)}
+                renderInput={(params) =>
+                    <TextField
+                        {...params}
+                        label="Fide"
+                        helperText="Rechercher votre nom et prénoms sur Fide"
+                    />}
             />
 
             <TextField
@@ -81,8 +124,9 @@ export default function Fide() {
 
                 })}
                 error={errors.lastname ? true : false}
+                InputLabelProps={{ shrink: true }}
                 helperText={errors.lastname && errors.lastname.message}
-                onKeyDown={(e) => OnlyLetter(e)}
+                onKeyPress={(e) => OnlyLetter(e)}
 
 
             />
@@ -98,8 +142,21 @@ export default function Fide() {
 
                 })}
                 error={errors.firstname ? true : false}
+                InputLabelProps={{ shrink: true }}
                 helperText={errors.firstname && errors.firstname.message}
-                onKeyDown={(e) => OnlyLetter(e)}
+                onKeyPress={(e) => OnlyLetter(e)}
+
+            />
+            <TextField
+                label="ID FIDE"
+                type={'text'}
+                InputProps={{
+                    readOnly: true
+                }}
+                {...register("id_fide")}
+                InputLabelProps={{ shrink: true }}
+                helperText={HelpText.autocompleted}
+
 
             />
 
@@ -110,6 +167,7 @@ export default function Fide() {
                     readOnly: true
                 }}
                 {...register("title")}
+                InputLabelProps={{ shrink: true }}
                 helperText={HelpText.autocompleted}
 
 
@@ -122,6 +180,7 @@ export default function Fide() {
                     readOnly: true
                 }}
                 {...register("standard_elo")}
+                InputLabelProps={{ shrink: true }}
                 helperText={HelpText.autocompleted}
 
 
@@ -134,6 +193,7 @@ export default function Fide() {
                     readOnly: true
                 }}
                 {...register("rapid_elo")}
+                InputLabelProps={{ shrink: true }}
                 helperText={HelpText.autocompleted}
             />
 
@@ -144,6 +204,7 @@ export default function Fide() {
                     readOnly: true
                 }}
                 {...register("blitz_elo")}
+                InputLabelProps={{ shrink: true }}
                 helperText={HelpText.autocompleted}
 
             />
