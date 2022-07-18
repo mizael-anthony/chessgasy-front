@@ -17,8 +17,6 @@ import { useState } from 'react'
 
 
 export function Account() {
-
-
     return (
         <Outlet />
     )
@@ -289,7 +287,7 @@ export const UserProfil = () => {
 
                 <Grid container spacing={{ xs: 2, md: 3 }}>
                     <Grid item xs={2} sm={2} md={3}>
-                        <Avatar src={'./wallhaven-2kg97y.jpg'} alt="Photo" sx={{ width: 128, height: 128 }} />
+                        <Avatar src={'./img/wallhaven-2kg97y.jpg'} alt="Photo" sx={{ width: 128, height: 128 }} />
 
                         <Button
                             variant="contained"

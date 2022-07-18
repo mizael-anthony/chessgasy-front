@@ -1,5 +1,5 @@
 import {
-    Typography, TextField, FormControl, Button,
+    TextField, FormControl, Button,
     FormLabel, Radio, useMediaQuery, Box,
     useTheme, RadioGroup, FormControlLabel, Avatar
 
@@ -8,25 +8,93 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useState } from 'react'
 import { Colors } from "../../styles/theme/Theme"
-import PersonIcon from '@mui/icons-material/Person';
-
+import { useForm } from "react-hook-form";
+import { fr } from "date-fns/locale";
+import { DEFAULT_PHOTO } from "../../temp/Default"
+import { useState, useEffect } from 'react';
+import { usePlayerContext } from "../../App";
+import moment from 'moment';
 
 
 
 export default function Personnal() {
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.down('md'))
-    const [sex, setSex] = useState('Homme')
-    const [birthday, setBirthday] = useState(new Date())
+
+    // Joueur 
+    const { player, changePlayer } = usePlayerContext()
+
+    const { watch, register, formState: { errors, isValid }, getValues, setValue } = useForm({
+        mode: 'all', defaultValues: {
+            ...player
+        }
+    })
+
+    // Valeur par défaut
+    const defaultSex = (player.sex === '') ? "Homme" : player.sex
+    const defaultBirthday = (player.birthday === '') ? new Date() : player.birthday
+
+    const [birthday, setBirthday] = useState(defaultBirthday)
+    const [sex, setSex] = useState(defaultSex)
+    const [photo, setPhoto] = useState(DEFAULT_PHOTO)
+    const [image, setImage] = useState(DEFAULT_PHOTO)
+
+
+    useEffect(() => {
+        setValue('sex', sex)
+    }, [sex])
+
+    useEffect(() => {
+        setValue('birthday', birthday)
+    }, [birthday])
+
+
+    useEffect(() => {
+        if (isValid) {
+            changePlayer({ ...player, ...getValues(), photo:photo, isCompleted: true })
+        }
+        else
+            changePlayer({ ...player, isCompleted: false })
+    }, [isValid])
+
+
+    const handleChangeSex = (e) => {
+        // Set value of Sex
+        setSex(e.target.value)
+    }
+
+    const handleChangeBirthday = (b) => {
+        setBirthday(b)
+    }
+
+
+    const handleChangeImage = (e) => {
+        const file = e.target.files[0]
+        // console.log(file)
+
+        setPhoto(file)
+
+        
+        // Lecture et affichage de la photo selectionnée
+        const readFile = new FileReader()
+        readFile.readAsDataURL(file)
+
+        readFile.addEventListener("load", () => {
+            setImage(readFile.result)
+        })
+    }
+
+
     return (
         <>
 
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 98, height: 98 }}>
-                    <PersonIcon />
-                </Avatar>
+                <Avatar
+                    style={{ width: 98, height: 98 }}
+                    src={image}
+                    alt="Image"
+                />
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -37,50 +105,54 @@ export default function Personnal() {
                     Changer de profil
                     <input
                         type="file"
-                        hidden
+                        accept="image/png"
+                        multiple={false}
+                        onChange={e => handleChangeImage(e)}
+
                     />
                 </Button>
             </Box>
 
-
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-
+            <LocalizationProvider adapterLocale={fr} dateAdapter={AdapterDateFns}>
                 {
                     !matches ?
 
                         (<DesktopDatePicker
-
                             label="Date de naissance"
-
-                            inputFormat="MM/dd/yyyy"
-
+                            minDate={new Date("01/01/1952")}
+                            maxDate={new Date()}
+                            inputFormat="dd/MM/yyyy"
                             value={birthday}
+                            onChange={(b) => handleChangeBirthday(b)}
+                            renderInput={(params) =>
+                                <TextField
+                                    {...params}
+                                    onKeyDown={(e) => { e.preventDefault() }}
+                                    helperText={params.error ? "Date de naissance invalide" : ""}
+                                />
+                            }
 
-                            onChange={(newBirthday) => {
-
-                                setBirthday(newBirthday)
-
-                            }}
-
-                            renderInput={(params) => <TextField {...params} />}
 
                         />) :
 
                         (<MobileDatePicker
 
                             label="Date de naissance"
-
-                            inputFormat="MM/dd/yyyy"
-
+                            minDate={new Date("01/01/1952")}
+                            maxDate={new Date()}
+                            inputFormat="dd/MM/yyyy"
                             value={birthday}
+                            onChange={(b) => handleChangeBirthday(b)}
 
-                            onChange={(newBirthday) => {
 
-                                setBirthday(newBirthday)
+                            renderInput={(params) =>
+                                <TextField
+                                    {...params}
+                                    onKeyDown={(e) => { e.preventDefault() }}
+                                    helperText={params.error ? "Date de naissance invalide" : ""}
+                                />
+                            }
 
-                            }}
-
-                            renderInput={(params) => <TextField {...params} />}
 
                         />)
 
@@ -88,38 +160,39 @@ export default function Personnal() {
 
             </LocalizationProvider>
 
+
+
             <FormControl>
-
                 <FormLabel>Sexe</FormLabel>
-
                 <RadioGroup
                     row
                     value={sex}
-                    onChange={(event) => {
-
-                        setSex(event.target.value)
-
-                    }}
-
+                    onChange={(e) => handleChangeSex(e)}
                 >
                     <FormControlLabel value="Homme" control={<Radio />} label="Homme" />
                     <FormControlLabel value="Femme" control={<Radio />} label="Femme" />
 
                 </RadioGroup>
-
-
             </FormControl>
 
 
             <TextField
                 label="Contact"
                 placeholder="Entrer votre numéro de téléphone"
-                required
+                {...register("contact", {
+                    required: {
+                        value: true,
+                        message: "Veuillez entrer votre numéro de téléphone."
+                    },
+                    pattern: {
+                        value: /^03([2-4]|8)[0-9]{7}$/,
+                        message: "Numéro de téléphone invalide."
+                    }
 
+                })}
+                error={errors.contact ? true : false}
+                helperText={errors.contact && errors.contact.message}
             />
-
-
-
 
 
         </>

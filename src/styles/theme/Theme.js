@@ -16,6 +16,8 @@ export const Colors = {
     darkreact: '#20232a',
     wood: '#DEB887',
     saddlebrown: '#8B4513',
+    red: '#F00',
+    
     // Chess figure
     chessblue: '#4C5D73',
     chesscreme: '#F2D7B6',

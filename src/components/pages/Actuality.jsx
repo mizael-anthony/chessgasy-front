@@ -59,7 +59,7 @@ export function ActualityCard({ data }) {
         <CardMedia
           component="img"
           height="150"
-          image="./wallhaven-2kg97y.jpg"
+          image="./img/wallhaven-2kg97y.jpg"
           alt="green iguana"
         />
         <CardContent>

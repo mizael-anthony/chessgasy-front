@@ -52,7 +52,7 @@ export function PlayerCard() {
 
       <Avatar
         alt="Bobby Fischer"
-        src="./wallhaven-2kg97y.jpg"
+        src="./img/wallhaven-2kg97y.jpg"
         sx={{ width: 250, height: 250, margin: "0.5em" }}
       />
 

@@ -16,3 +16,6 @@ export const Info = () => {
     <div>salut</div>
   )
 }
+
+
+

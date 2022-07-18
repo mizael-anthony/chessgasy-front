@@ -3,26 +3,32 @@ import {
 	Stepper, Box, Paper,
 	Button, StepContent, Typography,
 } from "@mui/material"
-import { useState } from "react"
+import { createContext } from "react"
+import { useState, useContext } from "react"
+import { dataContext, usePlayerContext } from "../App"
 import Adress from "../components/pages/Adress"
-import Connexion from "../components/pages/Connexion"
+import Connection from "../components/pages/Connection"
 import Fide from "../components/pages/Fide"
 import Personnal from "../components/pages/Personnal"
 
 
+// const player = {
+// 	username: '', email: '', password1: '', password2: '',
+// 	lastname: '', firstname: '', standard_elo: '', rapid_elo: '', blitz_elo: ''
+// }
+
 
 export const StepperItems = () => {
 
+	const { player, changePlayer } = usePlayerContext()
 	const steps = getSteps()
 	const [activeStep, setActiveStep] = useState(0)
+	// const { data } = useContext(dataContext)
 
-	const [player, setPlayer] = useState({
-		username: '', password1: '', password2: '',
-
-	})
-
+	// console.log(data)
 
 	const handleNext = () => {
+		changePlayer({ ...player, isCompleted: false })
 		setActiveStep(preActiveStep => preActiveStep + 1)
 	}
 
@@ -39,21 +45,25 @@ export const StepperItems = () => {
 		console.log("mande")
 	}
 
+
 	function getSteps() {
-		return ["Compte", "Informations personnelles", "Informations FIDE", "Adresse"]
+		return ["Compte", "Informations FIDE", "Adresse", "Informations personnelles",]
 	}
 
 
 	function getStepsContents(step) {
 		switch (step) {
 			case 0:
-				return <Connexion />
+				return <Connection />
 			case 1:
-				return <Personnal />
-			case 2:
 				return <Fide />
-			case 3:
+
+			case 2:
 				return <Adress />
+
+			case 3:
+				return <Personnal />
+
 
 			default:
 				return "Etape inconnue"
@@ -80,9 +90,6 @@ export const StepperItems = () => {
 								<StepLabel>
 									{label}
 								</StepLabel>
-
-
-
 							</Step>
 						))}
 
@@ -91,16 +98,9 @@ export const StepperItems = () => {
 
 					<>
 						{activeStep === steps.length ? (
-							<>
-								<Button variant="contained" type={'submit'}>
-									S'enregistrer
-								</Button>
-
-								<Button variant="contained" onClick={handlePrev}>
-									Revenir
-								</Button>
-
-							</>
+							<Button variant="contained" type={'submit'}>
+								S'enregistrer
+							</Button>
 						) : (
 							<>
 								{getStepsContents(activeStep)}
@@ -109,21 +109,13 @@ export const StepperItems = () => {
 										Revenir
 									</Button>
 
-									<Button variant="contained" onClick={handleNext}>
+									<Button variant="contained" onClick={handleNext} disabled={!player.isCompleted}>
 										{activeStep === steps.length - 1 ? "Terminer" : "Continuer"}
 									</Button>
-
-
 								</Box>
 							</>
 						)}
 					</>
-
-
-
-
-
-
 
 				</Paper>
 			</form>

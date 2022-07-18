@@ -66,7 +66,7 @@ export function TournamentCard() {
       <CardMedia
         component="img"
         height="194"
-        image="./wallhaven-2kg97y.jpg"
+        image="./img/wallhaven-2kg97y.jpg"
         alt="Paella dish"
       />
       <CardContent>

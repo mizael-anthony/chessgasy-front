@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/date-fns": "^2.6.0",
     "axios": "^0.27.2",
+    "constate": "^3.3.2",
     "date-fns": "^2.28.0",
     "moment": "^2.29.4",
     "react": "^18.1.0",
@@ -28,9 +29,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-scripts start .env",
+    "build": "react-scripts build .env",
+    "test": "react-scripts test .env",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

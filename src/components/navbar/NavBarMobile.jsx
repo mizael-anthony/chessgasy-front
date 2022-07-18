@@ -52,7 +52,7 @@ export default function NavBarMobile({ url, position }) {
         >
         ChessGasy
       </NavBarHeader>
-      <img src="./logo-chess4.ico" width={80} alt="logo"/>
+      <img src="./img/logo-chess4.ico" width={80} alt="logo"/>
       </Box>
 
 

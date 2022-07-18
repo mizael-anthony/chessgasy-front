@@ -11,7 +11,7 @@ export default function Banner() {
 
     return (
         <BannerContainer>
-            <BannerImage src="./wallhaven-2kg97y.jpg"/>
+            <BannerImage src="./img/wallhaven-2kg97y.jpg"/>
             
         </BannerContainer>
     )

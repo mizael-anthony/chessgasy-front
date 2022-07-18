@@ -51,7 +51,7 @@ export function ClubCard() {
         avatar={
           <Avatar
             alt="Bobby Fischer"
-            src="./wallhaven-2kg97y.jpg"
+            src="./img/wallhaven-2kg97y.jpg"
             sx={{ width: 100, height: 100 }}
 
           />
@@ -71,10 +71,10 @@ export function ClubCard() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus sint nesciunt perspiciatis fugiat modi quod quis optio quibusdam delectus. Iusto quis odio provident dicta at officiis culpa. Eius, quasi obcaecati!
         </Typography>
         <AvatarGroup total={24} sx={{ justifyContent: "center" }}>
-          <Avatar alt="Bobby Fischer" src="./wallhaven-2kg97y.jpg" />
-          <Avatar alt="Bobby Fischer" src="./wallhaven-2kg97y.jpg" />
-          <Avatar alt="Bobby Fischer" src="./wallhaven-2kg97y.jpg" />
-          <Avatar alt="Bobby Fischer" src="./wallhaven-2kg97y.jpg" />
+          <Avatar alt="Bobby Fischer" src="./img/wallhaven-2kg97y.jpg" />
+          <Avatar alt="Bobby Fischer" src="./img/wallhaven-2kg97y.jpg" />
+          <Avatar alt="Bobby Fischer" src="./img/wallhaven-2kg97y.jpg" />
+          <Avatar alt="Bobby Fischer" src="./img/wallhaven-2kg97y.jpg" />
         </AvatarGroup>
       </CardContent>
       <CardActions>

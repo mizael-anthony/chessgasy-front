@@ -15,7 +15,7 @@ export default function NavBarDesktop({ url , position}) {
     return (
 
     <NavBarContainer sx={{backgroundColor: Colors.dark, position:{position}}}>
-            <img src="./logo-chess4.ico" width={100} />
+            <img src="./img/logo-chess4.ico" width={100} />
             <NavBarHeader>ChessGasy</NavBarHeader>
             <LinkList type="row">
 
