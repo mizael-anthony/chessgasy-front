@@ -12,6 +12,31 @@ export class API {
         const result = await axios.get(url)
         return result
     }
+
+
+
+
+
+
+
+    static async listTeam(){
+        const url = ``
+        const result = axios.get(url)
+        return result
+    }
+
+
+    static async listTournament(){
+        const url = ``
+        const result = axios.get(url)
+        return result
+    }
+
+    static async listPlayer(){
+        const url = ``
+        const result = axios.get(url)
+        return result
+    }
 }
 
 

@@ -14,8 +14,14 @@ import { API } from '../../api/API';
 
 export default function Fide() {
 
+    const [suggestions, setSuggestions] = useState([{
+        id_fide: '', player_name: ''
+    }])
+
+
 
     const { player, changePlayer } = usePlayerContext()
+
 
 
     const { watch, register, formState: { errors, isValid }, getValues, setValue } = useForm({
@@ -23,6 +29,7 @@ export default function Fide() {
             ...player
         }
     })
+
 
 
 
@@ -36,16 +43,12 @@ export default function Fide() {
     }, [isValid])
 
 
-    const [suggestions, setSuggestions] = useState([{
-        id_fide: '', player_name: ''
-    }])
-
-
 
     const handleInputChangeFIDE = (e) => {
-        const player_name = e.target.value
+        const value = e.target.value
+        const player_name = value
 
-        if (player_name && player_name?.length >= 4) {
+        if (player_name?.length >= 4) {
             API.getPlayerIdFIDE(player_name)
                 .then(success => {
                     // Asina animation eto
@@ -60,36 +63,35 @@ export default function Fide() {
     }
 
     const handleSelectPlayerFIDE = (e) => {
-        const value = e.target.value
+        const value = e.target.value.split(':')
+        console.log(value);
 
-        if (value) {
-            const [selectedPlayerIdFide, selectedPlayerFullName] = value.split(',')
-            const id_fide = selectedPlayerIdFide
-            if (id_fide) {
-                API.getPlayerInfoFIDE(id_fide)
-                    .then(success => {
-                        // Asina animation eto
-                        const data = success.data
-                        setValue('lastname', data.nom)
-                        setValue('firstname', data.prenoms)
-                        setValue('title', data.titre)
-                        setValue('standard_elo', data.elo_standard)
-                        setValue('rapid_elo', data.elo_rapide)
-                        setValue('blitz_elo', data.elo_blitz)
+        if (value.length === 2) {
+            const id_fide = value[0]
+            API.getPlayerInfoFIDE(id_fide)
+                .then(success => {
+                    // Asina animation eto
+                    const data = success.data
+                    setValue('lastname', data.nom)
+                    setValue('firstname', data.prenoms)
+                    setValue('id_fide', data.id_fide)
+                    setValue('title', data.titre)
+                    setValue('standard_elo', data.elo_standard)
+                    setValue('rapid_elo', data.elo_rapide)
+                    setValue('blitz_elo', data.elo_blitz)
 
-                    })
-                    .catch(error => {
 
-                    })
-            }
+                })
+                .catch(error => {
+
+                })
+
         }
-
-
     }
 
     const showSuggestions = (suggestion) => {
         if (suggestion.id_fide) {
-            return `${suggestion.id_fide}, ${suggestion.player_name}`
+            return `${suggestion.id_fide}: ${suggestion.player_name}`
         }
         return ''
 
@@ -121,7 +123,6 @@ export default function Fide() {
                         value: true,
                         message: "Veuillez entrer votre nom."
                     },
-
                 })}
                 error={errors.lastname ? true : false}
                 InputLabelProps={{ shrink: true }}
