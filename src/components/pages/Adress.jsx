@@ -7,6 +7,8 @@ import { usePlayerContext } from "../../App";
 import { API } from '../../api/API';
 
 export default function Adress() {
+    const [isUpdated, setIsUpdated] = useState(false)
+
     const [suggestions, setSuggestions] = useState([{
         province: '', region: '', commune: '', quartier: ''
     }])
@@ -24,10 +26,11 @@ export default function Adress() {
             changePlayer({ ...player, ...getValues(), isCompleted: true })
 
         }
-        else
+        else {
             changePlayer({ ...player, isCompleted: false });
-    }, [isValid])
-
+        }
+        setIsUpdated(false)
+    }, [isUpdated, isValid])
 
 
     const handleChangeAdress = (e) => {
@@ -56,6 +59,8 @@ export default function Adress() {
             setValue('region', region, { shouldValidate: true })
             setValue('town', town, { shouldValidate: true })
             setValue('quarter', quarter, { shouldValidate: true })
+            setIsUpdated(true)
+
         }
 
 
@@ -75,7 +80,18 @@ export default function Adress() {
 
     return (
         <Box>
-            <pre>{JSON.stringify(watch(), null, 2)}</pre>
+            <Autocomplete
+                freeSolo
+                options={suggestions}
+                getOptionLabel={(suggestion) => showSuggestions(suggestion)}
+                onInputChange={(e) => handleChangeAdress(e)}
+                onSelect={(e) => handleSelectAdress(e)}
+                renderInput={(params) =>
+                    <TextField
+                        {...params}
+                        label="Quartier ou Fokontany"
+                    />}
+            />
 
             <TextField
                 label="Province"
@@ -116,7 +132,7 @@ export default function Adress() {
                 {...register("quarter", {
                     required: {
                         value: true,
-                        message: "Veuillez entrer le nom de votre quartier."
+                        message: "Veuillez rechercher le nom de votre quartier."
                     },
 
                 })}
@@ -126,18 +142,7 @@ export default function Adress() {
                 InputLabelProps={{ shrink: true }}
             />
 
-            <Autocomplete
-                freeSolo
-                options={suggestions}
-                getOptionLabel={(suggestion) => showSuggestions(suggestion)}
-                onInputChange={(e) => handleChangeAdress(e)}
-                onSelect={(e) => handleSelectAdress(e)}
-                renderInput={(params) =>
-                    <TextField
-                        {...params}
-                        label="Fokontany"
-                    />}
-            />
+
 
         </Box>
     )

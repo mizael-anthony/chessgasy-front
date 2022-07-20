@@ -21,6 +21,7 @@ import moment from 'moment';
 export default function Personnal() {
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.down('md'))
+    const [isUpdated, setIsUpdated] = useState(false)
 
     // Joueur 
     const { player, changePlayer } = usePlayerContext()
@@ -32,8 +33,9 @@ export default function Personnal() {
     })
 
     
-
-    const [birthday, setBirthday] = useState()
+    const [birthday, setBirthday] = useState(
+        moment(new Date()).format('YYYY-MM-DD')
+    )
     const [sex, setSex] = useState("homme")
     const [image, setImage] = useState(DEFAULT_PHOTO)
     const [photo, setPhoto] = useState()
@@ -50,11 +52,14 @@ export default function Personnal() {
 
     useEffect(() => {
         if (isValid) {
-            changePlayer({ ...player, ...getValues(), photo:photo, isCompleted: true })
+            changePlayer({ ...player, ...getValues(), isCompleted: true })
+
         }
-        else
-            changePlayer({ ...player, isCompleted: false })
-    }, [isValid])
+        else {
+            changePlayer({ ...player, isCompleted: false });
+        }
+        setIsUpdated(false)
+    }, [isUpdated, isValid])
 
 
     const handleChangeSex = (e) => {
@@ -70,10 +75,12 @@ export default function Personnal() {
 
     const handleChangeImage = (e) => {
         const file = e.target.files[0]
-        // console.log(file)
 
+        // Maj file value
         setPhoto(file)
         setValue('photo', photo)
+        setIsUpdated(true)
+
 
         
         // Lecture et affichage de la photo selectionnée

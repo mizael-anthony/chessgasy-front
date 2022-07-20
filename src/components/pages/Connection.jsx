@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { usePlayerContext } from "../../App";
 
 export default function Connection() {
+    const [isUpdated, setIsUpdated] = useState(false)
+
     const [passwordValue, showPasswordValue] = useState(false)
     const [confirmPasswordValue, showConfirmedPasswordValue] = useState(false)
 
@@ -32,12 +34,14 @@ export default function Connection() {
 
     useEffect(() => {
         if (isValid) {
-            changePlayer({...player, ...getValues(), isCompleted:true})
+            changePlayer({ ...player, ...getValues(), isCompleted: true })
 
         }
-        else 
-            changePlayer({...player, isCompleted:false});
-    }, [isValid])
+        else {
+            changePlayer({ ...player, isCompleted: false });
+        }
+        setIsUpdated(false)
+    }, [isUpdated, isValid])
 
     return (
         <Box sx={{ padding: '30px' }}>
@@ -50,6 +54,8 @@ export default function Connection() {
                             value: true,
                             message: "Veuillez entrer votre nom d'utilisateur."
                         },
+                        onChange: e => setIsUpdated(true)
+
 
                     })}
                     error={errors.username ? true : false}
@@ -68,7 +74,9 @@ export default function Connection() {
                         pattern: {
                             value: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
                             message: "Adresse mail invalide."
-                        }
+                        },
+                        onChange: e => setIsUpdated(true)
+
 
                     })}
                     error={errors.email ? true : false}
@@ -100,6 +108,8 @@ export default function Connection() {
                                 value: /^(?=.*[A-Za-z])(?=.*[.@$!%*#?&])[A-Za-z\d.@$!%*#?&]{8,}$/,
                                 message: "Le mot de passe doit contenir au moins 8 caractères mélangés."
                             },
+                            onChange: e => setIsUpdated(true)
+
                         })}
 
                     />
@@ -129,7 +139,9 @@ export default function Connection() {
                             },
                             validate: {
                                 samePassword: v => v === getValues("password1") || "Les mots de passe ne correspondent pas"
-                            }
+                            },
+                            onChange: e => setIsUpdated(true)
+
 
                         })}
                     />

@@ -44,7 +44,8 @@ function usePlayer() {
     last_name: '', first_name: '', title:'', standard_elo: 0, rapid_elo: 0, blitz_elo: 0, 
     province:'', region:'', town:'', quarter:'', isCompleted:false,
   })
-  const changePlayer = useCallback((...p) => setPlayer(...p))
+  // const changePlayer = useCallback((...p) => setPlayer(...p))
+  const changePlayer = (p) => setPlayer(p)
 
   
   return { player, changePlayer }

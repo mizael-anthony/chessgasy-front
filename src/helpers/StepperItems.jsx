@@ -113,7 +113,7 @@ export const StepperItems = () => {
 
 			}}
 		>
-			<form onSubmit={handleSubmit}>
+			<form encType="multipart/form-data" onSubmit={handleSubmit}>
 				<Paper elevation={10} sx={{ padding: '10px' }}>
 
 
