@@ -128,7 +128,7 @@ export default function Connection() {
                                 message: "Veuillez confirmer votre mot de passe s'il vous plait."
                             },
                             validate: {
-                                samePassword: v => getValues("password2") === getValues("password1") || "Les mots de passe ne correspondent pas"
+                                samePassword: v => v === getValues("password1") || "Les mots de passe ne correspondent pas"
                             }
 
                         })}

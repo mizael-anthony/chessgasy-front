@@ -5,6 +5,7 @@ import {
 } from "@mui/material"
 import { createContext } from "react"
 import { useState, useContext } from "react"
+import { API } from "../api/API"
 import { dataContext, usePlayerContext } from "../App"
 import Adress from "../components/pages/Adress"
 import Connection from "../components/pages/Connection"
@@ -36,13 +37,46 @@ export const StepperItems = () => {
 		setActiveStep(preActiveStep => preActiveStep - 1)
 	}
 
-	const handleReset = () => {
-		setActiveStep(0)
-	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log("mande")
+		// console.log(player)
+		const formData = new FormData()
+		formData.append("username", player.username)
+		formData.append("email", player.email)
+		formData.append("password1", player.password1)
+		formData.append("password2", player.password2)
+		formData.append("last_name", player.last_name)
+		formData.append("first_name", player.first_name)
+		formData.append("photo", player.photo)
+		formData.append("photo", player.photo)
+		formData.append("birthday", player.birthday)
+		formData.append("sex", player.sex)
+		formData.append("contact", player.contact)
+		formData.append("longitude", 0)
+		formData.append("latitude", 0)
+		formData.append("province", player.province)
+		formData.append("region", player.region)
+		formData.append("town", player.town)
+		formData.append("town", player.town)
+		formData.append("quarter", player.quarter)
+		formData.append("id_fide", player.id_fide)
+		formData.append("title", player.title)
+		formData.append("standard_elo", player.standard_elo)
+		formData.append("rapid_elo", player.rapid_elo)
+		formData.append("blitz_elo", player.blitz_elo)
+
+
+		API.registerPlayer(formData)
+			.then(success => {
+				console.log(success)
+			})
+			.catch(error => {
+				console.log(error)
+			})
+
+
+
 	}
 
 

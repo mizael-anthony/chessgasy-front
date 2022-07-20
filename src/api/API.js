@@ -13,26 +13,42 @@ export class API {
         return result
     }
 
+    static async getAdressMap(quarter_name) {
+        const url = `${process.env.REACT_APP_MAP_API_URL}/${quarter_name}`
+        const result = await axios.get(url)
+        return result
+    }
+
+
+    static async registerPlayer(player) {
+        const url = `${process.env.REACT_APP_USERS_API_URL}/register-player/`
+        const result = await axios.post(url, player, {headers:{'Content-Type': 'multipart/form-data'}})
+        return result
+    }
 
 
 
 
 
 
-    static async listTeam(){
+
+
+
+
+    static async listTeam() {
         const url = ``
         const result = axios.get(url)
         return result
     }
 
 
-    static async listTournament(){
+    static async listTournament() {
         const url = ``
         const result = axios.get(url)
         return result
     }
 
-    static async listPlayer(){
+    static async listPlayer() {
         const url = ``
         const result = axios.get(url)
         return result

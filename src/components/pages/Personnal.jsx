@@ -31,14 +31,12 @@ export default function Personnal() {
         }
     })
 
-    // Valeur par défaut
-    const defaultSex = (player.sex === '') ? "Homme" : player.sex
-    const defaultBirthday = (player.birthday === '') ? new Date() : player.birthday
+    
 
-    const [birthday, setBirthday] = useState(defaultBirthday)
-    const [sex, setSex] = useState(defaultSex)
-    const [photo, setPhoto] = useState(DEFAULT_PHOTO)
+    const [birthday, setBirthday] = useState()
+    const [sex, setSex] = useState("homme")
     const [image, setImage] = useState(DEFAULT_PHOTO)
+    const [photo, setPhoto] = useState()
 
 
     useEffect(() => {
@@ -65,7 +63,8 @@ export default function Personnal() {
     }
 
     const handleChangeBirthday = (b) => {
-        setBirthday(b)
+        const formatDate = moment(b).format('YYYY-MM-DD')
+        setBirthday(formatDate)
     }
 
 
@@ -74,6 +73,7 @@ export default function Personnal() {
         // console.log(file)
 
         setPhoto(file)
+        setValue('photo', photo)
 
         
         // Lecture et affichage de la photo selectionnée
@@ -88,6 +88,7 @@ export default function Personnal() {
 
     return (
         <>
+            <pre>{JSON.stringify(watch(), null, 2)}</pre>
 
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Avatar
@@ -107,6 +108,7 @@ export default function Personnal() {
                         type="file"
                         accept="image/png"
                         multiple={false}
+                        hidden
                         onChange={e => handleChangeImage(e)}
 
                     />
@@ -169,8 +171,8 @@ export default function Personnal() {
                     value={sex}
                     onChange={(e) => handleChangeSex(e)}
                 >
-                    <FormControlLabel value="Homme" control={<Radio />} label="Homme" />
-                    <FormControlLabel value="Femme" control={<Radio />} label="Femme" />
+                    <FormControlLabel value="homme" control={<Radio />} label="Homme" />
+                    <FormControlLabel value="femme" control={<Radio />} label="Femme" />
 
                 </RadioGroup>
             </FormControl>

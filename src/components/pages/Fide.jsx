@@ -19,19 +19,13 @@ export default function Fide() {
     }])
 
 
-
     const { player, changePlayer } = usePlayerContext()
-
-
 
     const { watch, register, formState: { errors, isValid }, getValues, setValue } = useForm({
         mode: 'all', defaultValues: {
             ...player
         }
     })
-
-
-
 
     useEffect(() => {
         if (isValid) {
@@ -64,7 +58,6 @@ export default function Fide() {
 
     const handleSelectPlayerFIDE = (e) => {
         const value = e.target.value.split(':')
-        console.log(value);
 
         if (value.length === 2) {
             const id_fide = value[0]
@@ -72,14 +65,13 @@ export default function Fide() {
                 .then(success => {
                     // Asina animation eto
                     const data = success.data
-                    setValue('lastname', data.nom)
-                    setValue('firstname', data.prenoms)
-                    setValue('id_fide', data.id_fide)
-                    setValue('title', data.titre)
-                    setValue('standard_elo', data.elo_standard)
-                    setValue('rapid_elo', data.elo_rapide)
-                    setValue('blitz_elo', data.elo_blitz)
-
+                    setValue('last_name', data.nom, {shouldValidate: true})
+                    setValue('first_name', data.prenoms, {shouldValidate: true})
+                    setValue('id_fide', data.id_fide, {shouldValidate: true})
+                    setValue('title', data.titre, {shouldValidate: true})
+                    setValue('standard_elo', data.elo_standard, {shouldValidate: true})
+                    setValue('rapid_elo', data.elo_rapide, {shouldValidate: true})
+                    setValue('blitz_elo', data.elo_blitz, {shouldValidate: true})
 
                 })
                 .catch(error => {
@@ -97,10 +89,9 @@ export default function Fide() {
 
     }
 
-
-
     return (
         <>
+            <pre>{JSON.stringify(watch(), null, 2)}</pre>
             <Autocomplete
                 freeSolo
                 options={suggestions}
@@ -118,15 +109,15 @@ export default function Fide() {
             <TextField
                 label="Nom"
                 placeholder="Entrer votre nom"
-                {...register("lastname", {
+                {...register("last_name", {
                     required: {
                         value: true,
                         message: "Veuillez entrer votre nom."
                     },
                 })}
-                error={errors.lastname ? true : false}
+                error={errors.last_name ? true : false}
                 InputLabelProps={{ shrink: true }}
-                helperText={errors.lastname && errors.lastname.message}
+                helperText={errors.last_name && errors.last_name.message}
                 onKeyPress={(e) => OnlyLetter(e)}
 
 
@@ -135,16 +126,16 @@ export default function Fide() {
             <TextField
                 label="Prénoms"
                 placeholder="Entrer vos prénoms"
-                {...register("firstname", {
+                {...register("first_name", {
                     required: {
                         value: true,
                         message: "Veuillez entrer vos prénoms."
                     },
 
                 })}
-                error={errors.firstname ? true : false}
+                error={errors.first_name ? true : false}
                 InputLabelProps={{ shrink: true }}
-                helperText={errors.firstname && errors.firstname.message}
+                helperText={errors.first_name && errors.first_name.message}
                 onKeyPress={(e) => OnlyLetter(e)}
 
             />

@@ -41,7 +41,7 @@ function usePlayer() {
   const [player, setPlayer] = useState({
     username: '', email: '', password1: '', password2: '',
     photo: '', sex: '', birthday:'', contact:'', id_fide: '',
-    lastname: '', firstname: '', title:'', standard_elo: '', rapid_elo: '', blitz_elo: '', 
+    last_name: '', first_name: '', title:'', standard_elo: 0, rapid_elo: 0, blitz_elo: 0, 
     province:'', region:'', town:'', quarter:'', isCompleted:false,
   })
   const changePlayer = useCallback((...p) => setPlayer(...p))
