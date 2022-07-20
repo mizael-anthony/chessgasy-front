@@ -43,11 +43,11 @@ export default function Personnal() {
 
     useEffect(() => {
         setValue('sex', sex)
-    }, [sex])
+    },[sex])
 
     useEffect(() => {
         setValue('birthday', birthday)
-    }, [birthday])
+    },[birthday])
 
 
     useEffect(() => {
@@ -78,11 +78,9 @@ export default function Personnal() {
 
         // Maj file value
         setPhoto(file)
-        setValue('photo', photo)
-        setIsUpdated(true)
+        setValue('photo', file)
 
 
-        
         // Lecture et affichage de la photo selectionnée
         const readFile = new FileReader()
         readFile.readAsDataURL(file)
@@ -95,7 +93,6 @@ export default function Personnal() {
 
     return (
         <>
-            <pre>{JSON.stringify(watch(), null, 2)}</pre>
 
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Avatar

@@ -40,7 +40,7 @@ export const StepperItems = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		// console.log(player)
+
 		const formData = new FormData()
 		formData.append("username", player.username)
 		formData.append("email", player.email)
@@ -49,7 +49,6 @@ export const StepperItems = () => {
 		formData.append("last_name", player.last_name)
 		formData.append("first_name", player.first_name)
 		formData.append("photo", player.photo)
-		formData.append("photo", player.photo)
 		formData.append("birthday", player.birthday)
 		formData.append("sex", player.sex)
 		formData.append("contact", player.contact)
@@ -57,7 +56,6 @@ export const StepperItems = () => {
 		formData.append("latitude", 0)
 		formData.append("province", player.province)
 		formData.append("region", player.region)
-		formData.append("town", player.town)
 		formData.append("town", player.town)
 		formData.append("quarter", player.quarter)
 		formData.append("id_fide", player.id_fide)
