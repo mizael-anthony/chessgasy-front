@@ -38,7 +38,6 @@ export default function Personnal() {
     )
     const [sex, setSex] = useState("homme")
     const [image, setImage] = useState(DEFAULT_PHOTO)
-    const [photo, setPhoto] = useState()
 
 
     useEffect(() => {
@@ -58,12 +57,12 @@ export default function Personnal() {
         else {
             changePlayer({ ...player, isCompleted: false });
         }
+
         setIsUpdated(false)
     }, [isUpdated, isValid])
 
 
     const handleChangeSex = (e) => {
-        // Set value of Sex
         setSex(e.target.value)
     }
 
@@ -76,9 +75,9 @@ export default function Personnal() {
     const handleChangeImage = (e) => {
         const file = e.target.files[0]
 
-        // Maj file value
-        setPhoto(file)
         setValue('photo', file)
+
+        setIsUpdated(true)
 
 
         // Lecture et affichage de la photo selectionnée
@@ -94,6 +93,8 @@ export default function Personnal() {
     return (
         <>
 
+        <pre>{JSON.stringify(watch(), null, 2)}</pre>
+
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Avatar
                     style={{ width: 98, height: 98 }}
@@ -105,14 +106,14 @@ export default function Personnal() {
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button
                     variant="contained"
-                    component="label"
+                    component="button"
                 >
                     Changer de profil
                     <input
                         type="file"
                         accept="image/png"
                         multiple={false}
-                        hidden
+                        
                         onChange={e => handleChangeImage(e)}
 
                     />
