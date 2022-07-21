@@ -21,7 +21,7 @@ export class API {
 
 
     static async registerPlayer(player) {
-        const url = `${process.env.REACT_APP_USERS_API_URL}/register-player/`
+        const url = `${process.env.REACT_APP_USERS_LOCAL_API_URL}/register-player/`
         const result = await axios.post(url, player, {headers:{'Content-Type': 'multipart/form-data'}})
         return result
     }

@@ -105,7 +105,7 @@ export default function Connection() {
                                 message: "Veuillez entrer votre mot de passe s'il vous plait."
                             },
                             pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*[.@$!%*#?&])[A-Za-z\d.@$!%*#?&]{8,}$/,
+                                value: /^(?=.*[A-Za-z])(?=.*[;.@$!%*#?&])[A-Za-z\d;.@$!%*#?&]{8,}$/,
                                 message: "Le mot de passe doit contenir au moins 8 caractères mélangés."
                             },
                             onChange: e => setIsUpdated(true)

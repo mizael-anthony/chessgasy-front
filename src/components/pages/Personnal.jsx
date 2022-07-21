@@ -73,16 +73,16 @@ export default function Personnal() {
 
 
     const handleChangeImage = (e) => {
-        const file = e.target.files[0]
+        const photo = e.target.files[0]
 
-        setValue('photo', file)
+        setValue('photo', photo)
 
         setIsUpdated(true)
 
 
         // Lecture et affichage de la photo selectionnée
         const readFile = new FileReader()
-        readFile.readAsDataURL(file)
+        readFile.readAsDataURL(photo)
 
         readFile.addEventListener("load", () => {
             setImage(readFile.result)
@@ -92,9 +92,6 @@ export default function Personnal() {
 
     return (
         <>
-
-        <pre>{JSON.stringify(watch(), null, 2)}</pre>
-
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Avatar
                     style={{ width: 98, height: 98 }}
@@ -106,15 +103,15 @@ export default function Personnal() {
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button
                     variant="contained"
-                    component="button"
+                    component="label"
                 >
                     Changer de profil
                     <input
                         type="file"
                         accept="image/png"
                         multiple={false}
-                        
                         onChange={e => handleChangeImage(e)}
+                        hidden
 
                     />
                 </Button>

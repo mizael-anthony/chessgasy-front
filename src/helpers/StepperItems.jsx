@@ -41,8 +41,6 @@ export const StepperItems = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 
-		console.log(player.photo)
-
 		const formData = new FormData()
 		formData.append("username", player.username)
 		formData.append("email", player.email)
