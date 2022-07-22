@@ -20,12 +20,12 @@ export const NavBarContainer = styled(Box)(() => ({
 // Header
 export const NavBarHeader = styled(Typography)(() => ({
 
-    padding: '4px',
-    flexGrow: 3,
-    fontSize: '4em',
+    padding: '2px',
+    flexGrow: 1,
+    fontSize: '3em',
     fontFamily: '"Montez", "cursive"',
-    color: Colors.stalegrey
-
+    color: Colors.stalegrey,
+    letterSpacing: '.3rem',
 
 }))
 

@@ -3,17 +3,18 @@ import {
     TextField, Typography, Paper,
     Avatar, Grid, Stack, FormGroup,
     useMediaQuery, useTheme, FormLabel,
-    RadioGroup, FormControlLabel, Radio
+    RadioGroup, FormControlLabel, Radio,
 } from "@mui/material"
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import PersonIcon from '@mui/icons-material/Person';
 import { Colors } from "../../styles/theme/Theme";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react'
+import { useForm } from "react-hook-form";
+import { API } from "../../api/API";
 
 
 export function Account() {
@@ -22,52 +23,117 @@ export function Account() {
     )
 }
 
-
 export const Login = () => {
+
+    const navigate = useNavigate()
+    const { watch, register, formState: { errors }, handleSubmit } = useForm({
+        mode: 'onSubmit'
+    })
+
+    const onSubmit = (data) => {
+        // console.log(data)
+        const formData = new FormData()
+        formData.append("username", data.username)
+        formData.append("email", data.email)
+        formData.append("password", data.password)
+
+        API.login(formData)
+            .then(success => {
+                console.log(success)
+                const data = success.data
+                localStorage.setItem('user_token', data.key)
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+
     return (
         <Grid>
 
-            <Paper elevation={10} style={{ padding: 30, height: '70vh', width: 350, margin: '20px auto' }}>
-                <Grid align={'center'}>
-                    <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 56, height: 56 }}><LockOutlinedIcon /></Avatar>
-                    <Typography variant="h5">Connexion</Typography>
-                </Grid>
-                <TextField
-                    placeholder="Entrer votre nom d'utilisateur"
-                    label="Nom d'utilisateur"
-                    fullWidth
-                    required
-                    style={{ margin: '7px auto' }}
-                />
-                <TextField
-                    placeholder="Entrer votre mot de passe"
-                    label="Mot de passe"
-                    fullWidth
-                    required
-                    type={'password'}
-                    style={{ margin: '7px auto' }}
-
-                />
+            <form onSubmit={(e) => { handleSubmit(onSubmit)(e) }}>
 
 
-                <Typography textAlign={'center'} variant="h6" style={{ margin: '5px auto' }} >
-                    <Link to="reset-password">Mot de passe oublié?</Link>
-                </Typography>
+                <Paper elevation={10} style={{ padding: 30, width: 350, margin: '20px auto' }}>
+                    <Stack spacing={2}>
+
+                        <Grid align={'center'}>
+                            <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 56, height: 56 }}><LockOutlinedIcon /></Avatar>
+                            <Typography variant="h5">Connexion</Typography>
+                        </Grid>
 
 
-                <Button variant="contained" type={'submit'} style={{ margin: '3px auto' }} fullWidth >
-                    Se connecter
-                </Button>
+                        <TextField
+                            placeholder="Entrer votre nom d'utilisateur"
+                            label="Nom d'utilisateur"
+                            fullWidth
+                            {...register('username', {
+                                required: {
+                                    value: true,
+                                    message: "Veuillez entrer votre nom d'utilisateur."
+                                }
+                            })}
+                            error={errors.username ? true : false}
+                            helperText={errors.username && errors.username.message}
+
+                        />
+
+                        <TextField
+                            placeholder="Entrer votre adresse electronique"
+                            label="Adresse electronique"
+                            fullWidth
+                            {...register('email', {
+                                required: {
+                                    value: true,
+                                    message: "Veuillez entrer votre adresse electronique"
+                                }
+                            })}
+                            error={errors.email ? true : false}
+                            helperText={errors.email && errors.email.message}
 
 
-                <Button variant="contained" color="error" style={{ margin: '3px auto' }} fullWidth>
-                    <Link to="register" style={{ textDecoration: 'none', color: 'white' }}>
-                        Créer un nouveau compte
-                    </Link>
-                </Button>
+                        />
+
+                        <TextField
+                            placeholder="Entrer votre mot de passe"
+                            label="Mot de passe"
+                            fullWidth
+                            type={'password'}
+                            {...register('password', {
+                                required: {
+                                    value: true,
+                                    message: "Veuillez entrer mot de passe"
+                                }
+                            })}
+                            error={errors.password ? true : false}
+                            helperText={errors.password && errors.password.message}
 
 
-            </Paper>
+                        />
+
+                        <Typography textAlign={'center'} variant="h6" style={{ margin: '5px auto' }} >
+                            <Link to="/user/reset-password">Mot de passe oublié?</Link>
+                        </Typography>
+
+
+                        <Button variant="contained" type={'submit'} style={{ margin: '3px auto' }} fullWidth >
+                            Se connecter
+                        </Button>
+
+
+                        <Button variant="contained" color="error" style={{ margin: '3px auto' }} fullWidth>
+                            <Link to="/user/register" style={{ textDecoration: 'none', color: 'white' }}>
+                                Créer un nouveau compte
+                            </Link>
+                        </Button>
+
+                    </Stack>
+
+
+                </Paper>
+            </form>
         </Grid>
 
 
@@ -75,210 +141,34 @@ export const Login = () => {
 }
 
 
-// Mila ovaina anle StepperItems
-export const Register = () => {
-
-
-    const theme = useTheme()
-    const matches = useMediaQuery(theme.breakpoints.down('md'))
-    const [sex, setSex] = useState('Homme')
-    const [birthday, setBirthday] = useState(new Date())
-
-
-    return (
-        <Stack component="form">
-            <Paper elevation={10} style={{ padding: 30, margin: '20px auto' }}>
-                <Stack spacing={2}>
-                    <FormGroup>
-                        <Typography variant="h4">Compte</Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                            <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 98, height: 98 }}>
-                                <PersonIcon />
-                            </Avatar>
-                        </Box>
-                        <Button
-                            variant="contained"
-                            component="label"
-                            sx={{ width: 'fit-content', margin: '5px auto' }}
-
-                        >
-                            Changer votre profil
-                            <input
-                                type="file"
-                                hidden
-                            />
-                        </Button>
-
-                        <TextField
-                            label="Nom d'utilisateur"
-                            placeholder="Entrer votre nom d'utilisateur"
-                            required
-                        />
-
-                        <TextField
-                            label="Mot de passe"
-                            placeholder="Entrer votre mot de passe"
-                            required
-
-                        />
-
-                        <TextField
-                            label="Confirmation mot de passe"
-                            placeholder="Répéter votre mot de passe"
-                            required
-                        />
-                    </FormGroup>
-
-
-
-
-                    <FormGroup>
-                        <Typography variant="h4">Informations personnelles</Typography>
-                        <TextField
-                            label="Nom"
-                            placeholder="Entrer votre nom"
-                            required
-                        />
-
-                        <TextField
-                            label="Prénoms"
-                            placeholder="Entrer vos prénoms"
-                            required
-
-                        />
-
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-
-                            {
-                                !matches ?
-                                    (<DesktopDatePicker
-                                        label="Date de naissance"
-                                        inputFormat="MM/dd/yyyy"
-                                        value={birthday}
-                                        onChange={(newBirthday) => {
-                                            setBirthday(newBirthday)
-                                        }}
-                                        renderInput={(params) => <TextField {...params} />}
-                                    />) :
-                                    (<MobileDatePicker
-                                        label="Date de naissance"
-                                        inputFormat="MM/dd/yyyy"
-                                        value={birthday}
-                                        onChange={(newBirthday) => {
-                                            setBirthday(newBirthday)
-                                        }}
-                                        renderInput={(params) => <TextField {...params} />}
-                                    />)
-                            }
-                        </LocalizationProvider>
-
-
-                        <FormControl>
-                            <FormLabel>Genre</FormLabel>
-                            <RadioGroup
-                                row
-                                value={sex}
-                                onChange={(event) => {
-                                    setSex(event.target.value)
-                                }}
-                            >
-                                <FormControlLabel value="Homme" control={<Radio />} label="Homme" />
-                                <FormControlLabel value="Femme" control={<Radio />} label="Femme" />
-                            </RadioGroup>
-
-
-                            <TextField
-                                label="Contact"
-                                placeholder="Entrer votre numéro de téléphone"
-                                required
-                            />
-                        </FormControl>
-
-
-
-
-                    </FormGroup>
-
-
-
-
-
-                    <FormGroup>
-
-                        <Typography variant="h4">Adresse</Typography>
-                        <TextField
-                            label="Province"
-                            required
-                            InputProps={{
-                                readOnly: true
-                            }}
-                        />
-
-                        <TextField
-                            label="Région"
-                            InputProps={{
-                                readOnly: true
-                            }}
-                            required
-                        />
-
-
-                        <TextField
-                            label="Commune"
-                            InputProps={{
-                                readOnly: true
-                            }}
-                            required
-                        />
-
-
-                        <TextField
-                            label="Quatier"
-                            placeholder="Entrer votre"
-                            required
-                        />
-
-
-
-                    </FormGroup>
-                </Stack>
-
-            </Paper>
-        </Stack>
-
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Mila asina anle StepperItems eto atao Register ny anarany
 
 export const UserProfil = () => {
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.down('md'))
 
+
+
+
     const [sex, setSex] = useState('Homme')
     const [birthday, setBirthday] = useState(new Date())
-    const [player, setPlayer] = useState({})
+
+
+    const handleClickLogout = () => {
+        const token = localStorage.getItem('user_token')
+
+        API.logout(token)
+            .then(success => {
+                console.log(success)
+                localStorage.removeItem('user_token')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+
+
+    }
 
     return (
         <Stack spacing={3} component="form">
@@ -447,7 +337,7 @@ export const UserProfil = () => {
 
 
                 </Grid>
-                <Box sx={{display:'flex', justifyContent:'space-between'}}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Button type={'submit'} variant="contained">
                         Modifier mon profil
                     </Button>
@@ -460,7 +350,7 @@ export const UserProfil = () => {
                         </Link>
                     </Button>
 
-                    <Button variant="contained">
+                    <Button variant="contained" onClick={handleClickLogout}>
                         Se deconnecter
                     </Button>
                 </Box>
@@ -468,6 +358,10 @@ export const UserProfil = () => {
         </Stack>
     )
 }
+
+
+
+
 
 export const ChangePassword = () => {
     return (
@@ -478,6 +372,15 @@ export const ChangePassword = () => {
                     <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 56, height: 56 }}><LockOutlinedIcon /></Avatar>
                     <Typography variant="h5">Réinitialisation mot de passe</Typography>
                 </Grid>
+
+                <TextField
+                    label="Ancien mot de passe"
+                    placeholder="Entrer votre ancien mot de passe"
+                    fullWidth
+                    required
+                    style={{ margin: '7px auto' }}
+                />
+
                 <TextField
                     label="Nouveau mot de passe"
                     placeholder="Entrer votre nouveau mot de passe"

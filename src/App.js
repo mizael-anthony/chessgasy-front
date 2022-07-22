@@ -11,10 +11,12 @@ import Footer from './components/footer/Footer';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Actuality } from './components/pages/Actuality'
 import { Club } from './components/pages/Club'
-import { Account, ChangePassword, Login, Register, UserProfil } from './components/pages/Account';
+import { Account, ChangePassword, Login, UserProfil, } from './components/pages/Account';
+import {Reset, ResetPassword, VerifyEmail, } from './components/pages/Reset';
 import { StepperItems } from './helpers/StepperItems';
 import { createContext } from 'react'
 import constate from "constate"
+import NotFound from './components/pages/NotFound';
 
 // function reducer(oldState,action){
 //   console.log(oldState,action);
@@ -100,14 +102,18 @@ function App() {
             <Route path="clubs" element={<Club />} />
             <Route path="players" element={<Player />} />
             <Route path="infos" element={<Infos />} />
-            <Route path="profil" element={<Account />}>
+            <Route path="user" element={<Account />}>
               <Route index element={<UserProfil />} />
               <Route path='login' element={<Login />} />
-              <Route path="reset-password" element={<ChangePassword />} />
+              <Route path="reset-password" element={<Reset />}>
+                <Route index element={<VerifyEmail/>}/>
+                <Route path="confirm-password" element={<ResetPassword/>}/>
+              </Route>
+              <Route path="change-password" element={<ChangePassword />} />
               <Route path="register" element={<StepperItems />} />
-              <Route path="user" element={<UserProfil />} />
-
+              <Route path="profil" element={<UserProfil />} />
             </Route>
+            <Route path="*" element={<NotFound/>} />
           </Routes>
           <Footer />
         </PlayerProvider>

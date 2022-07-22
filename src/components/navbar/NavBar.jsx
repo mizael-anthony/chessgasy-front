@@ -24,7 +24,7 @@ export default function NavBar() {
         'clubs': 'clubs',
         'players': 'players',
         'infos': 'infos',
-        'profil': 'profil',
+        'profil': 'user',
     }
 
     // Modifier position à chaque onglet
@@ -32,7 +32,7 @@ export default function NavBar() {
     const [position, setPosition] = useState('absolute')
 
     useEffect(() => {
-        if (location.pathname.includes("profil")) setPosition('static')
+        if (location.pathname.includes("user")) setPosition('static')
         else setPosition('absolute')
     }, [location])
 

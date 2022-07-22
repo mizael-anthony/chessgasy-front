@@ -19,6 +19,7 @@ export class API {
         return result
     }
 
+    // En local doly zao reto anh REACT_APP_USERS_LOCAL_API_URL
 
     static async registerPlayer(player) {
         const url = `${process.env.REACT_APP_USERS_LOCAL_API_URL}/register-player/`
@@ -26,25 +27,28 @@ export class API {
         return result
     }
 
-    static async getUserInfos(token){
-        const url = `${process.env.REACT_APP_USERS_API_URL}/infos/`
-        const result = await axios.get(url)
-        return result
-    }
-
     static async login(user){
-        const url = `${process.env.REACT_APP_USERS_API_URL}/login/`
+        const url = `${process.env.REACT_APP_USERS_LOCAL_API_URL}/login/`
         const result = await axios.post(url, user)
         return result
 
     }
 
-    static async logout(user, token){
-        const url = `${process.env.REACT_APP_USERS_API_URL}/logout/`
-        const result = await axios.post(url, user)
+    static async logout(token){
+        const url = `${process.env.REACT_APP_USERS_LOCAL_API_URL}/logout/`
+        const result = await axios.post(url, {headers:{'Authorization': `Token ${token}`}})
         return result
-
+    
     }
+
+
+    
+
+    static async getUserInfos(token){
+        
+    }
+
+
 
 
 
