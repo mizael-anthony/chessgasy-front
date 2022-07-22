@@ -17,27 +17,7 @@ import { StepperItems } from './helpers/StepperItems';
 import { createContext } from 'react'
 import constate from "constate"
 import NotFound from './components/pages/NotFound';
-
-// function reducer(oldState,action){
-//   console.log(oldState,action);
-//   return {
-//     ...oldState,
-//     ...action.data
-//   }
-// }
-
-// export const dataContext = createContext({
-//   data:{
-//     nom: "",
-//   prenom: ""
-//   },
-//   info:{nom:"",prenom:""},
-//   setInfo:()=>{}
-// })
-
-// const data = {
-//   nom: "rolio", prenom: "warol"
-// }
+import { TabItems } from './helpers/TabItems';
 
 function usePlayer() {
   const [player, setPlayer] = useState({
@@ -46,7 +26,6 @@ function usePlayer() {
     last_name: '', first_name: '', title:'', standard_elo: 0, rapid_elo: 0, blitz_elo: 0, 
     province:'', region:'', town:'', quarter:'', isCompleted:false,
   })
-  // const changePlayer = useCallback((...p) => setPlayer(...p))
   const changePlayer = (p) => setPlayer(p)
 
   
@@ -59,10 +38,6 @@ function usePlayer() {
 export const [PlayerProvider, usePlayerContext] = constate(usePlayer)
 
 function App() {
-  // console.log(process.env)
-  // const [info,dispatch]=useReducer(reducer,{nom:"rolio",prenom:"warol"})
-  // const emiter=useCallback((...arg)=>dispatch(...arg),[info])
-  // console.log(info);
 
   let location = useLocation()
   const [title, setTitle] = useState('Acceuil')
@@ -79,7 +54,6 @@ function App() {
 
 
   return (
-    // <dataContext.Provider value={{data,info,setInfo:emiter}} >
     <ThemeProvider theme={Theme}>
 
       <Container
@@ -111,7 +85,7 @@ function App() {
               </Route>
               <Route path="change-password" element={<ChangePassword />} />
               <Route path="register" element={<StepperItems />} />
-              <Route path="profil" element={<UserProfil />} />
+              <Route path="profil" element={<TabItems />} />
             </Route>
             <Route path="*" element={<NotFound/>} />
           </Routes>

@@ -15,6 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { API } from "../../api/API";
+import { usePlayerContext } from "../../App";
 
 
 export function Account() {
@@ -68,7 +69,6 @@ export const Login = () => {
                         <TextField
                             placeholder="Entrer votre nom d'utilisateur"
                             label="Nom d'utilisateur"
-                            fullWidth
                             {...register('username', {
                                 required: {
                                     value: true,
@@ -83,7 +83,6 @@ export const Login = () => {
                         <TextField
                             placeholder="Entrer votre adresse electronique"
                             label="Adresse electronique"
-                            fullWidth
                             {...register('email', {
                                 required: {
                                     value: true,
@@ -99,7 +98,6 @@ export const Login = () => {
                         <TextField
                             placeholder="Entrer votre mot de passe"
                             label="Mot de passe"
-                            fullWidth
                             type={'password'}
                             {...register('password', {
                                 required: {
@@ -148,8 +146,6 @@ export const UserProfil = () => {
     const matches = useMediaQuery(theme.breakpoints.down('md'))
 
 
-
-
     const [sex, setSex] = useState('Homme')
     const [birthday, setBirthday] = useState(new Date())
 
@@ -170,9 +166,19 @@ export const UserProfil = () => {
 
     }
 
+    const { player, changePlayer } = usePlayerContext()
+
+
+    const { watch, register, formState: { errors }, getValues } = useForm({
+        mode: 'all'
+    })
+
+
+
     return (
         <Stack spacing={3} component="form">
             <Paper elevation={10} style={{ padding: 30, margin: '20px auto' }}>
+                <pre>{JSON.stringify(watch(), null, 2)}</pre>
                 <Typography variant="h3" textAlign={'center'}>Mon profil</Typography>
 
                 <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -190,29 +196,29 @@ export const UserProfil = () => {
                                 hidden
                             />
                         </Button>
+
+
                         <TextField
                             label={"Nom d'utilisateur"}
-                            defaultValue={"Username"}
-                            required
+                            
                         />
+
+
                         <TextField
                             label="Contact"
-                            defaultValue="Valeur"
-                            required
+                            
                         />
                     </Grid>
 
                     <Grid item xs={2} sm={2} md={3}>
                         <TextField
                             label="Nom"
-                            defaultValue="Valeur"
-                            required
+                            
                         />
 
                         <TextField
                             label="Prénoms"
-                            defaultValue="Valeur"
-                            required
+                            
 
                         />
 
@@ -263,8 +269,7 @@ export const UserProfil = () => {
                     <Grid item xs={2} sm={2} md={3}>
                         <TextField
                             label="Province"
-                            defaultValue="Valeur"
-                            required
+                            
                             InputProps={{
                                 readOnly: true
                             }}
@@ -272,27 +277,24 @@ export const UserProfil = () => {
 
                         <TextField
                             label="Région"
-                            defaultValue="Valeur"
                             InputProps={{
                                 readOnly: true
                             }}
-                            required
+                            
                         />
 
                         <TextField
                             label="Commune"
-                            defaultValue="Valeur"
                             InputProps={{
                                 readOnly: true
                             }}
-                            required
+                            
                         />
 
 
                         <TextField
                             label="Quatier"
-                            defaultValue="Valeur"
-                            required
+                            
                         />
                     </Grid>
 
@@ -305,7 +307,7 @@ export const UserProfil = () => {
                             InputProps={{
                                 readOnly: true
                             }}
-                            required
+                            
 
                         />
 
@@ -314,7 +316,7 @@ export const UserProfil = () => {
                             InputProps={{
                                 readOnly: true
                             }}
-                            required
+                            
 
                         />
 
@@ -323,7 +325,7 @@ export const UserProfil = () => {
                             InputProps={{
                                 readOnly: true
                             }}
-                            required
+                            
                         />
 
                         <TextField
@@ -331,12 +333,14 @@ export const UserProfil = () => {
                             InputProps={{
                                 readOnly: true
                             }}
-                            required
+                            
                         />
                     </Grid>
 
 
                 </Grid>
+
+                
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Button type={'submit'} variant="contained">
                         Modifier mon profil
@@ -344,8 +348,7 @@ export const UserProfil = () => {
 
 
                     <Button variant="contained">
-
-                        <Link to={'reset-password'} style={{ textDecoration: 'none', color: 'white' }}>
+                        <Link to={'change-password'} style={{ textDecoration: 'none', color: 'white' }}>
                             Changer mon mot de passe
                         </Link>
                     </Button>
@@ -370,14 +373,14 @@ export const ChangePassword = () => {
             <Paper elevation={10} style={{ padding: 30, width: 350, margin: '20px auto' }}>
                 <Grid align={'center'}>
                     <Avatar style={{ backgroundColor: Colors.darkslategrey, width: 56, height: 56 }}><LockOutlinedIcon /></Avatar>
-                    <Typography variant="h5">Réinitialisation mot de passe</Typography>
+                    <Typography variant="h5">Changer de mot de passe</Typography>
                 </Grid>
 
                 <TextField
                     label="Ancien mot de passe"
                     placeholder="Entrer votre ancien mot de passe"
                     fullWidth
-                    required
+                    type={'password'}
                     style={{ margin: '7px auto' }}
                 />
 
@@ -385,17 +388,16 @@ export const ChangePassword = () => {
                     label="Nouveau mot de passe"
                     placeholder="Entrer votre nouveau mot de passe"
                     fullWidth
-                    required
+                    type={'password'}
                     style={{ margin: '7px auto' }}
                 />
+
                 <TextField
                     label="Confirmation mot de passe"
                     placeholder="Répeter votre mot de passe"
                     fullWidth
-                    required
                     type={'password'}
                     style={{ margin: '7px auto' }}
-
                 />
 
                 <Button variant="contained" type={'submit'} style={{ margin: '3px auto' }} fullWidth >

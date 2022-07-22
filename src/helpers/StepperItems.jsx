@@ -1,22 +1,16 @@
 import {
 	Step, StepLabel,
 	Stepper, Box, Paper,
-	Button, StepContent, Typography,
+	Button, StepContent,
 } from "@mui/material"
-import { createContext } from "react"
-import { useState, useContext } from "react"
+import { useState } from "react"
 import { API } from "../api/API"
-import { dataContext, usePlayerContext } from "../App"
+import { usePlayerContext } from "../App"
 import Adress from "../components/pages/Adress"
 import Connection from "../components/pages/Connection"
 import Fide from "../components/pages/Fide"
 import Personnal from "../components/pages/Personnal"
 
-
-// const player = {
-// 	username: '', email: '', password1: '', password2: '',
-// 	lastname: '', firstname: '', standard_elo: '', rapid_elo: '', blitz_elo: ''
-// }
 
 
 export const StepperItems = () => {
@@ -24,9 +18,6 @@ export const StepperItems = () => {
 	const { player, changePlayer } = usePlayerContext()
 	const steps = getSteps()
 	const [activeStep, setActiveStep] = useState(0)
-	// const { data } = useContext(dataContext)
-
-	// console.log(data)
 
 	const handleNext = () => {
 		changePlayer({ ...player, isCompleted: false })

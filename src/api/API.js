@@ -19,7 +19,7 @@ export class API {
         return result
     }
 
-    // En local doly zao reto anh REACT_APP_USERS_LOCAL_API_URL
+    // En local doly zao reto anh REACT_APP_USERS_LOCAL_API_URL mila ovaina le Heroku
 
     static async registerPlayer(player) {
         const url = `${process.env.REACT_APP_USERS_LOCAL_API_URL}/register-player/`
@@ -42,7 +42,7 @@ export class API {
     }
 
 
-    
+
 
     static async getUserInfos(token){
         
