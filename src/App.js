@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material';
 import Theme, { Colors } from './styles/theme/Theme';
@@ -12,44 +12,75 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Actuality } from './components/pages/Actuality'
 import { Club } from './components/pages/Club'
 import { Account, ChangePassword, Login, UserProfil, } from './components/pages/Account';
-import {Reset, ResetPassword, VerifyEmail, } from './components/pages/Reset';
+import { Reset, ResetPassword, VerifyEmail, } from './components/pages/Reset';
 import { StepperItems } from './helpers/StepperItems';
-import { createContext } from 'react'
 import constate from "constate"
 import NotFound from './components/pages/NotFound';
-import { TabItems } from './helpers/TabItems';
+import { API } from './api/API';
+
 
 function usePlayer() {
+
   const [player, setPlayer] = useState({
     username: '', email: '', password1: '', password2: '',
-    photo: '', sex: '', birthday:'', contact:'', id_fide: '',
-    last_name: '', first_name: '', title:'', standard_elo: 0, rapid_elo: 0, blitz_elo: 0, 
-    province:'', region:'', town:'', quarter:'', isCompleted:false,
+    photo: '', sex: '', birthday: '', contact: '', id_fide: '',
+    last_name: '', first_name: '', title: '', standard_elo: 0, rapid_elo: 0, blitz_elo: 0,
+    province: '', region: '', town: '', quarter: '',
+    isCompleted: false,
+
   })
+
+  useEffect(() => {
+    const token = localStorage.getItem('user_token')
+    if (token) {
+      API.getUserInfos(token)
+        .then(success => {
+          // console.log(success)
+          const data = success.data
+          const place = data.place
+
+          API.getPlayer(data.username)
+            .then(player => {
+              console.log(player)
+
+            })
+            .catch(error => {
+              console.log(error)
+
+            })
+
+          changePlayer({ ...player, ...data, ...place })
+
+
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+
+
+    }
+  }, [])
+
+
+
+
   const changePlayer = (p) => setPlayer(p)
 
-  
+
   return { player, changePlayer }
 }
-
-
-
 
 export const [PlayerProvider, usePlayerContext] = constate(usePlayer)
 
 function App() {
 
-  let location = useLocation()
-  const [title, setTitle] = useState('Acceuil')
-
-
 
 
   useEffect(() => {
-    document.title = `ChessGasy - ${title}`
+    document.title = `ChessGasy | Acceuil`
 
-
-  }, [location])
+  })
 
 
 
@@ -68,7 +99,6 @@ function App() {
         }>
         <PlayerProvider>
           <NavBar />
-
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="news" element={<Actuality />} />
@@ -77,17 +107,17 @@ function App() {
             <Route path="players" element={<Player />} />
             <Route path="infos" element={<Infos />} />
             <Route path="user" element={<Account />}>
-              <Route index element={<UserProfil />} />
+              <Route index element={localStorage.getItem('user_token') ? <UserProfil /> : <Login />} />
               <Route path='login' element={<Login />} />
-              <Route path="reset-password" element={<Reset />}>
-                <Route index element={<VerifyEmail/>}/>
-                <Route path="confirm-password" element={<ResetPassword/>}/>
-              </Route>
+              <Route path='profil' element={<UserProfil />} />
               <Route path="change-password" element={<ChangePassword />} />
               <Route path="register" element={<StepperItems />} />
-              <Route path="profil" element={<TabItems />} />
+              <Route path="reset-password" element={<Reset />}>
+                <Route index element={<VerifyEmail />} />
+                <Route path="confirm-password/:uid/:token" element={<ResetPassword />} />
+              </Route>
             </Route>
-            <Route path="*" element={<NotFound/>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </PlayerProvider>

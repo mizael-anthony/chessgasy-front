@@ -1,9 +1,9 @@
 import {
     Box, Paper, Button,
-    Tabs, Tab, Typography
+    Tabs, Tab, Typography, Container
 } from "@mui/material"
 import { API } from "../api/API"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { usePlayerContext } from "../App"
 import { Link } from "react-router-dom"
 import PropTypes from 'prop-types';
@@ -40,6 +40,12 @@ export const TabItems = () => {
     }
 
 
+    useEffect(() => {
+        // Atao ato ny requête maka ny info anle joueur rehetra
+
+    }, [])
+
+
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
 
@@ -53,7 +59,7 @@ export const TabItems = () => {
             >
                 {value === index && (
                     <Box sx={{ p: 3 }}>
-                        <Typography>{children}</Typography>
+                        {children}
                     </Box>
                 )}
             </div>
@@ -76,14 +82,14 @@ export const TabItems = () => {
     return (
         <Box
             sx={{
-                width: '50%', margin: '1em auto',
+                width: '80%', margin: '1em auto',
 
             }}
         >
 
             <form onSubmit={(e) => handleSubmit(e)}>
                 <Paper elevation={10} sx={{ padding: '10px' }}>
-                    <Typography variant="h2" textAlign={"center"}>Mon compte</Typography>
+                    <Typography variant="h3" textAlign={"center"}>Mon compte</Typography>
 
                     <Box
                         sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '50vh' }}
@@ -95,15 +101,23 @@ export const TabItems = () => {
                             sx={{ borderRight: 1, borderColor: 'divider' }}
                         >
 
-                            <Tab label="Compte" value={0} />
+                            <Tab label="Profil" value={0} />
                             <Tab label="Informations FIDE" value={1} />
                             <Tab label="Adresse" value={2} />
-                            <Tab label="Informations personnelles" value={3} />
+                            <Tab label="Administration" value={3} />
                         </Tabs>
-                        <TabPanel value={tab} index={0}>Item One</TabPanel>
-                        <TabPanel value={tab} index={1}>Item Two</TabPanel>
-                        <TabPanel value={tab} index={2}>Item Three</TabPanel>
-                        <TabPanel value={tab} index={3}>Item Four</TabPanel>
+                        <TabPanel value={tab} index={0}>
+                            Item One
+                        </TabPanel>
+                        <TabPanel value={tab} index={1}>
+                            Item Two
+                        </TabPanel>
+                        <TabPanel value={tab} index={2}>
+                            Item Three
+                        </TabPanel>
+                        <TabPanel value={tab} index={3}>
+                            Item Four
+                        </TabPanel>
                     </Box>
 
 
@@ -112,7 +126,6 @@ export const TabItems = () => {
                         <Button type={'submit'} variant="contained">
                             Modifier mon profil
                         </Button>
-
 
                         <Button variant="contained">
                             <Link to={'change-password'} style={{ textDecoration: 'none', color: 'white' }}>

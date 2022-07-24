@@ -45,7 +45,7 @@ export default function Fide() {
     }, [isUpdated, isValid])
 
 
-    const handleInputChangeFIDE = (e) => {
+    const handleInputChangePlayerFIDE = (e) => {
         const value = e.target.value
         const player_name = value
 
@@ -91,7 +91,7 @@ export default function Fide() {
         }
     }
 
-    const handleClearSelected = (e) => {
+    const handleClearSelectedPlayerFIDE = (e) => {
         setValue('id_fide', '')
         setValue('title', '')
         setValue('standard_elo', 0)
@@ -114,8 +114,8 @@ export default function Fide() {
                 freeSolo
                 options={suggestions}
                 getOptionLabel={(suggestion) => showSuggestions(suggestion)}
-                onInputChange={(e) => handleInputChangeFIDE(e)}
-                onChange={(e) => handleClearSelected(e)}
+                onInputChange={(e) => handleInputChangePlayerFIDE(e)}
+                onChange={(e) => handleClearSelectedPlayerFIDE(e)}
                 onSelect={(e) => handleSelectPlayerFIDE(e)}
                 renderInput={(params) =>
                     <TextField

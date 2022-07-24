@@ -6,9 +6,14 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
 import Banner from '../banner/Banner';
+import { useState, useContext, useEffect } from "react";
 
 
 export function Actuality() {
+  useEffect(() => {
+    document.title = `ChessGasy | Actualités`
+
+  })
   return (
     <>
       <Banner />

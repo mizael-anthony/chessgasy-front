@@ -1,7 +1,7 @@
 import {
 	Step, StepLabel,
 	Stepper, Box, Paper,
-	Button, StepContent,
+	Button,
 } from "@mui/material"
 import { useState } from "react"
 import { API } from "../api/API"
@@ -96,7 +96,6 @@ export const StepperItems = () => {
 
 	return (
 		<Box
-
 			sx={{
 				width: '50%', margin: '1em auto',
 

@@ -75,7 +75,7 @@ export default function Personnal() {
     const handleChangeImage = (e) => {
         const photo = e.target.files[0]
 
-        setValue('photo', photo)
+        setValue('photo', photo, {shouldValidate: true})
 
         setIsUpdated(true)
 
@@ -110,11 +110,17 @@ export default function Personnal() {
                         type="file"
                         accept="image/png"
                         multiple={false}
-                        onChange={e => handleChangeImage(e)}
+                        {...register('photo', {
+                            required:{
+                                value:true,
+                                message: 'Veuillez ajouter votre profil.'
+                            },
+                            onChange:e => handleChangeImage(e)
+                        })}
                         hidden
-
                     />
                 </Button>
+                <small color='red'>{errors.photo && errors.photo.message }</small>
             </Box>
 
             <LocalizationProvider adapterLocale={fr} dateAdapter={AdapterDateFns}>

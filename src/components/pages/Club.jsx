@@ -6,8 +6,13 @@ import TitleItem from '../../helpers/TitleItem';
 import { Container, Grid } from '@mui/material'
 import { PaginationBox } from '../../helpers/PaginationBox';
 import Banner from '../banner/Banner';
+import { useState, useContext, useEffect } from "react";
 
 export function Club() {
+  useEffect(() => {
+    document.title = `ChessGasy | Clubs`
+
+  }, [])
   return (
     <>
       <Banner />
